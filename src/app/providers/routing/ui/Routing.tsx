@@ -1,0 +1,14 @@
+import { Suspense } from "react"
+import { Routes as ReactRoutes, Route } from "react-router-dom"
+import { Routes } from "../lib/Routes"
+export const Routing = () => {
+    return(
+        <Suspense fallback={<div>loading</div>}>
+            <ReactRoutes>
+                {Routes.map(item => (
+                    <Route key={item.path} path={item.path} element={item.element}/>
+                ))}
+            </ReactRoutes>
+        </Suspense>
+    )
+}

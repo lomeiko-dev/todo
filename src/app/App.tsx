@@ -1,13 +1,11 @@
-import { Routing } from "./providers/routing/ui/Routing"
+import { Routing } from "./providers/routing/ui/Routing";
 
-  function App() {
-    console.log(import.meta.env.MODE)
+function App() {
   return (
     <>
-    
-      <Routing/>
+      <Routing />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

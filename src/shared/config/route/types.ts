@@ -7,4 +7,6 @@ export interface IRoutePath {
 export enum enumPath {
   home = "home",
   project = "project",
+  auth = "auth",
+  notfound = "notfound",
 }

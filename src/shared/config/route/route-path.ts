@@ -9,4 +9,12 @@ export const RoutePath: Record<enumPath, IRoutePath> = {
     path: "/project",
     fullPath: "/project/:id",
   },
+  [enumPath.auth]: {
+    path: "/auth",
+    fullPath: "/auth/:type",
+  },
+  [enumPath.notfound]: {
+    path: "/not-found",
+    fullPath: "/not-found",
+  },
 };

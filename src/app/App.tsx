@@ -1,5 +1,4 @@
 import { Routing } from "./providers/routing/ui/Routing";
-
 function App() {
   return (
     <>

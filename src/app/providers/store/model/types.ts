@@ -1,3 +1,5 @@
+import { authApiReducer } from "features/auth";
+
 export interface IStore {
-  // slices&query
+  AuthApi: ReturnType<typeof authApiReducer>
 }

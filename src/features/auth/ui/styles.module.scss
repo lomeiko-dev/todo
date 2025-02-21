@@ -1,0 +1,16 @@
+.form{
+    padding: 20px ;// test
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .password_block{
+        display: flex;
+        flex-direction: column;
+        gap: inherit;
+    }
+}
+
+.form_small{
+    gap: 10px;
+}

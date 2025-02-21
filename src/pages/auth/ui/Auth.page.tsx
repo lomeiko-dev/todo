@@ -7,7 +7,7 @@ import background_light from "shared/assets/bg/auth.background.jpg";
 const AuthPage = () => {
   return (
     <div style={{ backgroundImage: `url(${background_light})` }} className={classnames(style.page)}>
-      <RegistrationForm isMobile onSuccessSubmitForm={() => null}/>
+      <RegistrationForm onSuccessSubmitForm={() => null}/>
     </div>
   );
 };

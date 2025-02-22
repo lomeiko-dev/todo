@@ -11,7 +11,7 @@ export const RoutePath: Record<enumPath, IRoutePath> = {
   },
   [enumPath.auth]: {
     path: "/auth",
-    fullPath: "/auth/:type",
+    fullPath: "/auth",
   },
   [enumPath.notfound]: {
     path: "/not-found",

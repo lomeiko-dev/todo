@@ -1,0 +1,35 @@
+.paper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+    min-height: 400px;
+    padding: 30px 20px;
+    transition: .2s;
+
+    h2{
+        margin-bottom: 20px;
+    }
+}
+
+.paper_mobile{
+    max-width: 400px;
+    padding: 20px 20px;
+    h2{
+        margin-bottom: 10px;
+    }
+}
+
+.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0% { transform: translateY(0); }
+    25% { transform: translateY(-5px); }
+    50% { transform: translateY(5px); }
+    75% { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
+  }

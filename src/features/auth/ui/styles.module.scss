@@ -1,8 +1,8 @@
 .form{
-    padding: 20px ;// test
     display: flex;
     flex-direction: column;
     gap: 15px;
+    width: 100%;
 
     .password_block{
         display: flex;
@@ -13,4 +13,13 @@
 
 .form_small{
     gap: 10px;
+}
+
+.error_list{
+    display: flex;
+    flex-direction: column;
+    p{
+        color: red;
+        font-size: 12px;
+    }
 }

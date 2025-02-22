@@ -1,28 +1,24 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IAuthData } from "../types/auth-data.type";
 
-const initialState: IAuthData = {
-  isAuth: false,
-};
+const initialState: IAuthData = {};
 
 const authDataSlice = createSlice({
   name: "AuthData",
   initialState,
   reducers: {
-    login(state, action: PayloadAction<Omit<IAuthData, "isAuth">>) {
-      state.isAuth = true;
+    setAuthData(state, action: PayloadAction<IAuthData>) {
       state.id = action.payload.id;
-      state.login = action.payload.login;
+      state.email = action.payload.email;
       state.tokens = action.payload.tokens;
     },
     logout(state) {
-      state.isAuth = false;
       state.id = undefined;
-      state.login = undefined;
+      state.email = undefined;
       state.tokens = undefined;
     },
   },
 });
 
-export const {login, logout} = authDataSlice.actions
-export const authDataSliceReducer = authDataSlice.reducer
+export const { setAuthData, logout } = authDataSlice.actions;
+export const authDataSliceReducer = authDataSlice.reducer;

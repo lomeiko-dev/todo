@@ -1,7 +1,7 @@
 export interface IRoutePath {
   name?: string;
   path: string;
-  fullPath: string;
+  isGuard: boolean;
 }
 
 export enum enumPath {

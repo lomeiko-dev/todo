@@ -21,9 +21,15 @@ export const authApi = createApi({
         body,
       }),
     }),
+    getAuthData: build.query<IAuthData, void>({
+      query: () => ({
+        url: fetchQuery.authData.url,
+        method: fetchQuery.authData.method,
+      }),
+    }),
   }),
 });
 
-export const { useRegisterMutation, useLoginMutation } = authApi;
+export const { useRegisterMutation, useLoginMutation, useGetAuthDataQuery, useLazyGetAuthDataQuery } = authApi;
 export const authApiReducer = authApi.reducer;
 export const authApiMiddleware = authApi.middleware;

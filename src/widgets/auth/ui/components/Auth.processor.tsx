@@ -1,5 +1,5 @@
 import { CircularProgress } from "@mui/material";
-import { login } from "entities/auth";
+import { setAuthData } from "entities/auth";
 import {
   LoginFormLazy,
   RegistrationFormLazy,
@@ -37,7 +37,7 @@ export const AuthProcessor: React.FC<IProps> = React.memo((props) => {
 
     if (result.isSuccess && result.data) {
       navigate(RoutePath.home.path);
-      dispatch(login(result.data));
+      dispatch(setAuthData(result.data));
     }
   }, [resultRegister, resultLogin]);
 

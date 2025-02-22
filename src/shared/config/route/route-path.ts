@@ -3,18 +3,19 @@ import { enumPath, IRoutePath } from "./types";
 export const RoutePath: Record<enumPath, IRoutePath> = {
   [enumPath.home]: {
     path: "/home",
-    fullPath: "/home",
+    isGuard: true,
   },
   [enumPath.project]: {
-    path: "/project",
-    fullPath: "/project/:id",
+    path: "/project/:id",
+    name: "/project",
+    isGuard: true,
   },
   [enumPath.auth]: {
     path: "/auth",
-    fullPath: "/auth",
+    isGuard: false,
   },
   [enumPath.notfound]: {
     path: "/not-found",
-    fullPath: "/not-found",
+    isGuard: false,
   },
 };

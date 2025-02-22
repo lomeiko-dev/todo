@@ -3,27 +3,32 @@ import { HomePageLazy } from "pages/home";
 import { NotFoundPageLazy } from "pages/not-found";
 import { ProjectPageLazy } from "pages/project";
 import { RouteProps } from "react-router";
-import { RoutePath } from "shared/config/route";
+import { RoutePath, IRoutePath } from "shared/config/route";
 
-export const Routes: RouteProps[] = [
+export const Routes: (RouteProps & IRoutePath)[] = [
     {
-        path: RoutePath.home.fullPath,
-        element: <HomePageLazy/>
+        path: RoutePath.home.path,
+        element: <HomePageLazy/>,
+        isGuard: RoutePath.home.isGuard
     },
     {
-        path: RoutePath.project.fullPath,
-        element: <ProjectPageLazy/>
+        path: RoutePath.project.path,
+        element: <ProjectPageLazy/>,
+        isGuard: RoutePath.project.isGuard
     },
     {
-        path: RoutePath.auth.fullPath,
-        element: <AuthPageLazy/>
+        path: RoutePath.auth.path,
+        element: <AuthPageLazy/>,
+        isGuard: RoutePath.auth.isGuard
     },
     {
-        path: RoutePath.notfound.fullPath,
-        element: <NotFoundPageLazy/>
+        path: RoutePath.notfound.path,
+        element: <NotFoundPageLazy/>,
+        isGuard: RoutePath.notfound.isGuard
     },
     {
         path: '*',
-        element: <NotFoundPageLazy/>
+        element: <NotFoundPageLazy/>,
+        isGuard: false
     }
 ]

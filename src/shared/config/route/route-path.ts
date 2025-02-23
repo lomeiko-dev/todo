@@ -7,7 +7,7 @@ export const RoutePath: Record<enumPath, IRoutePath> = {
   },
   [enumPath.project]: {
     path: "/project/:id",
-    name: "/project",
+    name: "/project/",
     isGuard: true,
   },
   [enumPath.auth]: {
@@ -17,5 +17,14 @@ export const RoutePath: Record<enumPath, IRoutePath> = {
   [enumPath.notfound]: {
     path: "/not-found",
     isGuard: false,
+  },
+  [enumPath.todo]: {
+    path: "/todo",
+    isGuard: true,
+  },
+  [enumPath.todoDetail]: {
+    path: "/todo/detail/:id",
+    name: "/todo/detal/",
+    isGuard: true,
   },
 };

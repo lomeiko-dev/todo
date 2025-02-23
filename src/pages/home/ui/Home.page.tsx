@@ -1,7 +1,11 @@
+import { Layout } from "widgets/layout";
+
 const HomePage = () => {
     return (
         <div>
-            home page
+            <Layout>
+                dsg
+            </Layout>
         </div>
     )
 }

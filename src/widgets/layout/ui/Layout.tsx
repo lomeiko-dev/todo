@@ -1,6 +1,6 @@
 import { IDefaultComponentsProps } from "shared/types/props.types";
 import classNames from "classnames";
-import { Sidebar } from "./components/SideBar";
+import { Sidebar } from "./components/Sidebar";
 import { useState } from "react";
 import { Box, Container, IconButton } from "@mui/material";
 import DehazeIcon from "@mui/icons-material/Dehaze";

@@ -1,0 +1,59 @@
+.paper {
+    padding: 5px;
+    cursor: pointer;
+    transform: scale(1);
+    transition: .2s;
+
+    .head {
+        padding: 5px;
+        min-width: 0;
+        max-width: 600px;
+
+        .descr {
+            margin: 0;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    }
+
+}
+
+.foot {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.paper:hover {
+    transition: .2s;
+    transform: scale(1.0025);
+}
+
+.tag_list {
+    display: flex;
+    flex-direction: row;
+
+
+    .tag_item {
+        margin: 0;
+        padding: 0 5px;
+        width: auto;
+
+        .tag_chip {
+            font-size: 10px;
+            padding: 2px;
+
+            .MuiChip-avatar {
+                width: 8px !important;
+                height: 8px !important;
+            }
+        }
+    }
+}
+
+.test {
+    width: 8px;
+    height: 8px;
+}

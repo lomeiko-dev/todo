@@ -21,7 +21,6 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import classNames from "classnames";
 import { IDefaultComponentsProps } from "shared/types/props.types";
 
-import style from "./styles.module.scss";
 import React, { useState } from "react";
 import FolderIcon from "@mui/icons-material/Folder";
 
@@ -56,7 +55,7 @@ export const Sidebar: React.FC<IProps> = (props) => {
 
   return (
     <Drawer
-      className={classNames(className, style.drawer)}
+      className={classNames(className)}
       style={styleCSS}
       sx={{
         width: drawerWidthPx,

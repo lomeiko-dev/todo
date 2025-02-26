@@ -1,0 +1,66 @@
+@mixin buttonNonHover {
+    pointerEvents: auto;
+    background-color: transparent;
+    box-shadow: none;
+
+    &:hover {
+        background-color: transparent;
+    }
+
+    &:active {
+        background-color: transparent
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.tag-add-button {
+    @include buttonNonHover()
+}
+
+.tag-chip {
+    font-size: 10px;
+    padding: 2px;
+
+    .MuiChip-avatar {
+        width: 8px !important;
+        height: 8px !important;
+    }
+}
+
+.tag-color {
+    border-radius: 50% !important;
+    width: 8px !important;
+    height: 8px !important;
+}
+
+.tag-editor-item {
+    margin: 0 !important;
+    padding: 0 15px !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+
+    .button {
+        @include buttonNonHover()
+    }
+
+    .text {
+        width: 100%;
+        line-height: 0;
+        font-size: 12px;
+    }
+
+    .icon {
+        width: 14px;
+    }
+}
+
+.tag-input{
+    margin-left: 8px;
+    font-size: 12px;
+}

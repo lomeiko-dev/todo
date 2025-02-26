@@ -1,9 +1,5 @@
-export type typePriority = "p1" | "p2" | "p3" | "p4";
-
-export interface ITagTodo {
-  color: string;
-  title: string;
-}
+import { ITagTodo, typePriority } from "shared/ui/Boxes";
+import { Dayjs } from "dayjs";
 
 export interface ICommentTodo {
   userAvatar: string;
@@ -21,6 +17,10 @@ export interface ITodo {
   tags?: ITagTodo[];
   dateCreated: string;
   dateUpdated: string;
-  deadline: string;
+  deadline: Dayjs;
   priority: typePriority;
+}
+
+export interface ITodoState {
+  todos: ITodo[];
 }

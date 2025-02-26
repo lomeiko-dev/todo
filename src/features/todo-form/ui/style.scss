@@ -1,0 +1,80 @@
+@mixin row-center {
+    display: flex;
+    flex-direction: row !important;
+    align-items: center !important;
+}
+
+.paper {
+    padding: 10px;
+    margin: 10px 0;
+    overflow: hidden;
+    height: auto;
+    transition: clip-path 0.5s ease-in-out;
+}
+
+.head {
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    padding: 1px;
+    max-width: 100% !important;
+}
+
+.todo-title {
+    @include row-center;
+}
+
+.input-name {
+    .MuiInputBase-input {
+        font-size: 18px;
+    }
+}
+
+.todo-manage {
+    @include row-center;
+    gap: 8px;
+}
+
+.input-descr {
+    .MuiInputBase-input {
+        font-size: 14px !important;
+    }
+}
+
+.properties-manage {
+    display: flex;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+
+    .properties-list {
+        @include row-center;
+        gap: 10px;
+
+        .properties-list-item {
+            margin: 0;
+            padding: 0;
+            width: max-content;
+        }
+    }
+}
+
+.hiden {
+    .paper {
+        height: max-content;
+        padding: 0 10px;
+    }
+
+    .input-name {
+        .MuiInputBase-input {
+            font-size: 16px;
+            font-weight: 400
+        }
+    }
+
+    .input-descr,
+    .todo-edit-devider,
+    .todo-edit-list-properties,
+    .properties-manage {
+        display: none !important;
+    }
+}

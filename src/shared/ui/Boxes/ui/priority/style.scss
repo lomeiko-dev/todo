@@ -1,0 +1,13 @@
+.priority-stack{
+    display: flex;
+    flex-direction: row !important;
+    align-items: center !important;
+
+    .icon{
+        width: 16px;
+    }
+
+    .text{
+        font-size: 12px;
+    }
+}

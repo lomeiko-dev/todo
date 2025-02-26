@@ -1,10 +1,9 @@
 import { Box, Checkbox, Container, Divider, Stack } from "@mui/material";
 import { TodoHead } from "./components/TodoHead";
-import { DateBox } from "shared/ui/Boxes";
+import { DateBox, PriorityBox } from "shared/ui/Boxes";
 import { TagList } from "./components/TagList";
 import { ITodo } from "../model/types/types";
 import React from "react";
-import { PriorityBox } from "./components/PriorityBox";
 import './style.scss'
 
 interface IProps {

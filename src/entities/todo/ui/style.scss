@@ -1,15 +1,22 @@
-.paper {
+.todo-item {
+    display: flex;
+    flex-direction: row;
     padding: 5px;
     cursor: pointer;
     transform: scale(1);
     transition: .2s;
 
-    .head {
-        padding: 5px;
-        min-width: 0;
-        max-width: 600px;
+    .todo-checkbox{
+        margin-bottom: auto;
+    }
 
+    .todo-item-content {
+        padding: 5px;
+        width: 100%;
+        
         .descr {
+            min-width: 0;
+            max-width: 600px;
             margin: 0;
             display: -webkit-box;
             -webkit-box-orient: vertical;
@@ -40,20 +47,25 @@
         margin: 0;
         padding: 0 5px;
         width: auto;
-
-        .tag_chip {
-            font-size: 10px;
-            padding: 2px;
-
-            .MuiChip-avatar {
-                width: 8px !important;
-                height: 8px !important;
-            }
-        }
     }
 }
 
 .test {
     width: 8px;
     height: 8px;
+}
+
+.list-properties {
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center !important;
+    gap: 10px;
+
+    .properties-item {
+        margin: 0;
+        padding: 0;
+        width: max-content;
+    }
 }

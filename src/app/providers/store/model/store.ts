@@ -2,10 +2,12 @@ import { configureStore, ReducersMapObject } from "@reduxjs/toolkit";
 import { IStore } from "./types";
 import { authApiMiddleware, authApiReducer } from "features/auth";
 import { authDataSliceReducer } from "entities/auth";
+import { todoSliceReducer } from "entities/todo";
 
 const rootReducer: ReducersMapObject<IStore> = {
   AuthApi: authApiReducer,
   AuthData: authDataSliceReducer,
+  Todo: todoSliceReducer
 };
 
 export const store = configureStore({

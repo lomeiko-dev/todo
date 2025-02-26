@@ -1,8 +1,10 @@
 import { Box, Button, Modal, Typography } from "@mui/material";
 import { TodoDetail } from "entities/todo/ui/Todo.detail";
 import { TodoItem } from "entities/todo/ui/Todo.item";
+import { TodoEdit } from "features/todo-form/ui/Todo.edit";
 import React from "react";
 import { Layout } from "widgets/layout";
+import dayJs from 'dayjs'
 
 const HomePage = () => {
   const [open, setOpen] = React.useState(false);
@@ -22,6 +24,7 @@ const HomePage = () => {
   return (
     <div>
       <Layout>
+        <TodoEdit/>
         <TodoItem
           todo={{
             title: "Новая задача",
@@ -30,13 +33,10 @@ const HomePage = () => {
             id: "1",
             dateCreated: "02.24.2025",
             dateUpdated: "",
-            deadline: "02.24.2025",
+            deadline: dayJs(new Date()),
             isCompleted: false,
             priority: "p3",
             tags: [
-              { color: "blue", title: "front-end" },
-              { color: "red", title: "hot" },
-              { color: "green", title: "fix" },
             ],
           }}
         />
@@ -56,14 +56,10 @@ const HomePage = () => {
             id: "1",
             dateCreated: "02.24.2025",
             dateUpdated: "",
-            deadline: "02.24.2025",
+            deadline: dayJs(new Date()),
             isCompleted: false,
             priority: "p3",
-            tags: [
-              { color: "blue", title: "front-end" },
-              { color: "red", title: "hot" },
-              { color: "green", title: "fix" },
-            ],
+            tags: [],
           }}/>
           </Box>
         </Modal>

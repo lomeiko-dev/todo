@@ -1,7 +1,7 @@
+import classNames from "classnames";
 import { Stack, Typography } from "@mui/material";
 import { IDefaultComponentsProps } from "shared/types/props.types";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import classNames from "classnames";
 
 interface IProps extends IDefaultComponentsProps {
   date: string;

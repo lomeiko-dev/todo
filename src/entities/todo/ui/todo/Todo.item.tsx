@@ -1,14 +1,14 @@
 import { useState } from "react";
 import classNames from "classnames";
-import "../style.scss";
+import "./style.scss";
 import { Box, Checkbox, Divider, Paper } from "@mui/material";
 import { IDefaultComponentsProps } from "shared/types/props.types";
-import { ITodo } from "entities/todo/model";
 import { ListProperties, TodoHead } from "../components";
+import { ITodo } from "entities/todo/model";
 
 interface IProps extends IDefaultComponentsProps {
   todo: ITodo;
-  menuSlot?: React.ReactNode
+  menuSlot?: React.ReactNode;
 }
 
 export const TodoItem: React.FC<IProps> = (props) => {

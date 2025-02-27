@@ -1,10 +1,10 @@
+import classNames from "classnames";
 import "./style.scss";
 import { Fab, Stack } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import ArchiveIcon from "@mui/icons-material/Archive";
 import { IDefaultComponentsProps } from "shared/types/props.types";
-import classNames from "classnames";
+import ArchiveIcon from "@mui/icons-material/Archive";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 interface IProps extends IDefaultComponentsProps {
   onRemove: () => void;

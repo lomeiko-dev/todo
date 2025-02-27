@@ -10,6 +10,30 @@
     overflow: hidden;
     height: auto;
     transition: clip-path 0.5s ease-in-out;
+
+    .todo-edit-head {
+        display: flex;
+        flex-direction: column;
+        border-radius: 5px;
+        padding: 1px;
+        max-width: 100% !important;
+
+        .todo-title {
+            @include row-center;
+
+            .input-name {
+                .MuiInputBase-input {
+                    font-size: 18px;
+                }
+            }
+        }
+
+        .input-descr {
+            .MuiInputBase-input {
+                font-size: 14px !important;
+            }
+        }
+    }
 }
 
 .todo-edit-error{
@@ -24,33 +48,9 @@
     }
 }
 
-.todo-edit-head {
-    display: flex;
-    flex-direction: column;
-    border-radius: 5px;
-    padding: 1px;
-    max-width: 100% !important;
-}
-
-.todo-title {
-    @include row-center;
-}
-
-.input-name {
-    .MuiInputBase-input {
-        font-size: 18px;
-    }
-}
-
 .todo-manage {
     @include row-center;
     gap: 8px;
-}
-
-.input-descr {
-    .MuiInputBase-input {
-        font-size: 14px !important;
-    }
 }
 
 .properties-manage {

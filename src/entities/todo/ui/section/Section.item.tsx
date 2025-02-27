@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import "../style.scss";
+import "./style.scss";
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from "@mui/material";
 import { IDefaultComponentsProps } from "shared/types/props.types";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";

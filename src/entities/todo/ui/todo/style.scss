@@ -1,0 +1,40 @@
+.todo-item {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    cursor: pointer;
+    transform: scale(1);
+    transition: .2s;
+    width: 100%;
+    position: relative;
+
+    .todo-checkbox{
+        margin-bottom: auto;
+    }
+
+    .todo-item-content {
+        padding: 5px;
+        width: 100%;
+
+        .todo-item-content-inner{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+
+            .todo-item-content-left{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+            }
+        }
+        
+    }
+}
+
+.foot {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}

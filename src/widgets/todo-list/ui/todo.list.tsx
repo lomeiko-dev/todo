@@ -1,9 +1,9 @@
 import classNames from "classnames";
-import { List, ListItem } from "@mui/material";
-import { ITodo, TodoItem, todoRemove } from "entities/todo";
-import { IDefaultComponentsProps } from "shared/types/props.types";
-import { TodoMenu } from "features/todo-form";
 import { useAppDispatch } from "shared/lib/hooks";
+import { List, ListItem } from "@mui/material";
+import { TodoMenu } from "features/todo-form";
+import { IDefaultComponentsProps } from "shared/types/props.types";
+import { ITodo, TodoItem, todoRemove } from "entities/todo";
 
 interface IProps extends IDefaultComponentsProps {
   todos: ITodo[];

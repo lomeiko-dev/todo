@@ -1,9 +1,9 @@
+import React from "react";
+import './style.scss'
 import { Box, Checkbox, Container, Divider, Stack } from "@mui/material";
 import { DateBox, PriorityBox } from "shared/ui/boxes";
-import React from "react";
-import '../style.scss'
-import { ITodo } from "entities/todo/model";
 import { TagList, TodoHead } from "../components";
+import { ITodo } from "entities/todo/model";
 
 interface IProps {
   todo: ITodo;

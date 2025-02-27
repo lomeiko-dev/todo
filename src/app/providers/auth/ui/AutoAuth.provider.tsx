@@ -1,6 +1,6 @@
+import React, { useEffect } from "react";
 import { setAuthData } from "entities/auth";
 import { useGetAuthDataQuery } from "features/auth";
-import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { RoutePath } from "shared/config/route";

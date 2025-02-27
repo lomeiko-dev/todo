@@ -1,12 +1,12 @@
 import { useState } from "react";
 import classNames from "classnames";
 import { Button, List, ListItem, Menu } from "@mui/material";
-import { IDefaultComponentsProps } from "shared/types/props.types";
 import { useTagsForm } from "../../model/lib/hooks/useTagsForm";
-import { ITag } from "shared/ui/boxes";
-import TagIcon from "@mui/icons-material/Tag";
 import { TagForm } from "./additional/TagForm";
 import { TagItem } from "./additional/TagItem";
+import { IDefaultComponentsProps } from "shared/types/props.types";
+import { ITag } from "shared/ui/boxes";
+import TagIcon from "@mui/icons-material/Tag";
 
 interface IProps extends IDefaultComponentsProps {
   valueTags: ITag[];
@@ -16,7 +16,7 @@ interface IProps extends IDefaultComponentsProps {
 export const TagsEditor: React.FC<IProps> = (props) => {
   const { onChange, valueTags, className, styleCSS } = props;
 
-  const { onChangeColor, onCreateNewTag, onRemoveTag, setValue, tags, value } = useTagsForm(onChange, valueTags);
+  const { onChangeColor, onCreateNewTag, onRemoveTag, setValue, tags, value } = useTagsForm({onChange, tags: valueTags});
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 

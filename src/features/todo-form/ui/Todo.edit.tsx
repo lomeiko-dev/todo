@@ -100,7 +100,7 @@ export const TodoEdit: React.FC<IProps> = (props) => {
             tags={watch("tags")}
           />
         </Box>
-        <Divider className="todo-edit-devider" />
+        <Divider className="todo-edit-devider"/>
         <Stack className="properties-manage">
           <List className="properties-list">
             <ListItem className="properties-list-item">

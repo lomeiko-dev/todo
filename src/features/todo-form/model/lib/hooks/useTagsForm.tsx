@@ -1,12 +1,20 @@
 import { useState } from "react";
 import { idGenerator } from "shared/lib/utils";
+import { ITagsFormProps } from "../type";
 import { ITag } from "shared/ui/boxes";
 
-export const useTagsForm = (onChange: (tags: ITag[]) => void, tags: ITag[]) => {
+export const useTagsForm = (initial: ITagsFormProps) => {
+  const { onChange, tags } = initial;
   const [value, setValue] = useState<string>("");
 
   const onCreateNewTag = () => {
-    const newTags = [...tags, { color: "white", title: value === "" ? "Default tag" : value, id: idGenerator() }];
+    const newTag: ITag = {
+      color: "white",
+      title: value === "" ? "Default tag" : value,
+      id: idGenerator(),
+    };
+    
+    const newTags = [...tags, newTag];
     setValue("");
     onChange(newTags);
   };

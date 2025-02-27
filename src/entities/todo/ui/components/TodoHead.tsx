@@ -1,7 +1,7 @@
-import { Box, Typography } from "@mui/material";
 import classNames from "classnames";
-import { IDefaultComponentsProps } from "shared/types/props.types";
 import "../style.scss";
+import { Box, Typography } from "@mui/material";
+import { IDefaultComponentsProps } from "shared/types/props.types";
 
 interface IProps extends IDefaultComponentsProps {
   title: string;

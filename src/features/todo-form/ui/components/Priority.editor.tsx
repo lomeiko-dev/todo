@@ -3,7 +3,8 @@ import classNames from "classnames";
 import { Button, List, Menu } from "@mui/material";
 import { prioritySelections } from "../../model/selections/priority.selections";
 import { IDefaultComponentsProps } from "shared/types/props.types";
-import { PriorityItem, typePriority } from "shared/ui/Boxes";
+import { typePriority } from "shared/ui/boxes";
+import { PriorityItem } from "./additional/PriorityItem";
 import FlagIcon from "@mui/icons-material/Flag";
 
 interface IProps extends IDefaultComponentsProps {

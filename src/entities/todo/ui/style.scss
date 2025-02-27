@@ -5,6 +5,8 @@
     cursor: pointer;
     transform: scale(1);
     transition: .2s;
+    width: 100%;
+    position: relative;
 
     .todo-checkbox{
         margin-bottom: auto;
@@ -13,17 +15,38 @@
     .todo-item-content {
         padding: 5px;
         width: 100%;
-        
-        .descr {
-            min-width: 0;
-            max-width: 600px;
-            margin: 0;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-    }
 
+        .todo-item-content-inner{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+
+            .todo-item-content-left{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+            }
+        }
+        
+    }
+}
+
+.todo-item-menu-slot{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.descr {
+    min-width: 0;
+    max-width: 600px;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
 }
 
 .foot {
@@ -42,11 +65,10 @@
     display: flex;
     flex-direction: row;
 
-
     .tag_item {
-        margin: 0;
-        padding: 0 5px;
-        width: auto;
+        margin: 0 !important;
+        padding: 0 5px !important;
+        width: auto !important;
     }
 }
 
@@ -68,4 +90,9 @@
         padding: 0;
         width: max-content;
     }
+}
+
+.section-todo-accardion{
+    background-color: transparent !important;
+    --Paper-shadow: none !important;
 }

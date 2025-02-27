@@ -1,4 +1,4 @@
-import { ITagTodo, typePriority } from "shared/ui/Boxes";
+import { ITag, typePriority } from "shared/ui/boxes";
 import { Dayjs } from "dayjs";
 
 export interface ICommentTodo {
@@ -14,7 +14,7 @@ export interface ITodo {
   isCompleted: boolean;
   comments?: ICommentTodo;
   subTasks?: ITodo[];
-  tags?: ITagTodo[];
+  tags?: ITag[];
   dateCreated: string;
   dateUpdated: string;
   deadline: Dayjs;

@@ -1,9 +1,9 @@
+import classNames from "classnames";
 import { IconButton, ListItem, Typography } from "@mui/material";
 import { ColorPicker } from "shared/ui/pickers";
-import CloseIcon from "@mui/icons-material/Close";
 import { IDefaultComponentsProps } from "shared/types/props.types";
-import classNames from "classnames";
-import { ITag } from "../../model";
+import { ITag } from "shared/ui/boxes";
+import CloseIcon from "@mui/icons-material/Close";
 
 interface IProps extends IDefaultComponentsProps {
   tag: ITag;

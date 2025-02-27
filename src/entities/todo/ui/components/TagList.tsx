@@ -2,10 +2,10 @@ import {List, ListItem } from "@mui/material";
 import { IDefaultComponentsProps } from "shared/types/props.types";
 import "../style.scss";
 import classNames from "classnames";
-import { ITagTodo, TagBox } from "shared/ui/Boxes";
+import { ITag, TagBox } from "shared/ui/boxes";
 
 interface IProps extends IDefaultComponentsProps {
-  tags: ITagTodo[];
+  tags: ITag[];
 }
 
 export const TagList: React.FC<IProps> = (props) => {

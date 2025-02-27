@@ -1,0 +1,63 @@
+@mixin buttonNonHover {
+    pointer-events: auto;
+    background-color: transparent;
+    box-shadow: none;
+
+    &:hover {
+        background-color: transparent;
+    }
+
+    &:active {
+        background-color: transparent
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.list-priority-item{
+    margin: 0 !important;
+    padding: 5px 15px !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.tag-input-box{
+    margin: 5px 10px !important; 
+    .tag-input{
+        margin-left: 8px !important;
+        font-size: 12px;
+    }
+
+    .tag-add-button {
+        @include buttonNonHover()
+    }
+}
+
+.tag-editor-item {
+    margin: 0 !important;
+    padding: 0 15px !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+
+    .button {
+        @include buttonNonHover()
+    }
+
+    .text {
+        width: 100%;
+        line-height: 0;
+        font-size: 12px;
+    }
+
+    .icon {
+        width: 14px;
+    }
+}

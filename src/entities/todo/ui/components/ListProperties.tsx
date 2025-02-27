@@ -2,7 +2,7 @@ import classNames from "classnames";
 import "../style.scss";
 import { List, ListItem } from "@mui/material";
 import { TagList } from "./TagList";
-import { DateBox, PriorityBox } from "shared/ui/Boxes";
+import { DateBox, PriorityBox } from "shared/ui/boxes";
 import { IDefaultComponentsProps } from "shared/types/props.types";
 import { ITodo } from "../../model/types/types";
 

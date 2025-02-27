@@ -1,30 +1,24 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import classNames from "classnames";
 import { Button, List, ListItem, Menu } from "@mui/material";
 import { IDefaultComponentsProps } from "shared/types/props.types";
 import { useTagsForm } from "../../model/lib/hooks/useTagsForm";
-import { ITagTodo, TagForm, TagItem } from "shared/ui/Boxes";
+import { ITag } from "shared/ui/boxes";
 import TagIcon from "@mui/icons-material/Tag";
+import { TagForm } from "./additional/TagForm";
+import { TagItem } from "./additional/TagItem";
 
 interface IProps extends IDefaultComponentsProps {
-  valueTags: ITagTodo[];
-  onChange: (tags: ITagTodo[]) => void;
+  valueTags: ITag[];
+  onChange: (tags: ITag[]) => void;
 }
 
 export const TagsEditor: React.FC<IProps> = (props) => {
   const { onChange, valueTags, className, styleCSS } = props;
 
-  const {onChangeColor, onCreateNewTag, onRemoveTag, setValue, tags, value, initialTags} = useTagsForm()
+  const { onChangeColor, onCreateNewTag, onRemoveTag, setValue, tags, value } = useTagsForm(onChange, valueTags);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-
-  useEffect(() => {
-    initialTags(valueTags)
-  }, [])
-
-  useEffect(() => {
-    onChange(tags);
-  }, [tags])
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -55,10 +49,10 @@ export const TagsEditor: React.FC<IProps> = (props) => {
       >
         <List>
           {tags?.map((item) => (
-            <TagItem tag={item} onRemove={onRemoveTag} onChange={onChangeColor}/>
+            <TagItem tag={item} onRemove={onRemoveTag} onChange={onChangeColor} />
           ))}
           <ListItem>
-            <TagForm value={value} onCreateNewTag={onCreateNewTag} setValue={setValue}/>
+            <TagForm value={value} onCreateNewTag={onCreateNewTag} setValue={setValue} />
           </ListItem>
         </List>
       </Menu>

@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import './style.scss'
+import '../style.scss'
 import { Box, IconButton, InputBase } from "@mui/material";
 import { IDefaultComponentsProps } from "shared/types/props.types";
 import AddIcon from "@mui/icons-material/Add";
@@ -14,7 +14,7 @@ export const TagForm: React.FC<IProps> = (props) => {
   const { onCreateNewTag, setValue, value, className, styleCSS } = props;
 
   return (
-    <Box className={classNames(className)} sx={styleCSS} borderRadius={1} border={"1px solid #33333320"}>
+    <Box className={classNames(className, 'tag-input-box')} sx={styleCSS} borderRadius={1} border={"1px solid #33333320"}>
       <InputBase
         value={value}
         onChange={(e) => setValue(e.target.value)}

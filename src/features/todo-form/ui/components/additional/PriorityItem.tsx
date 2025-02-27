@@ -1,10 +1,10 @@
 import classNames from "classnames";
-import './style.scss'
+import '../style.scss'
 import { ListItemButton, Typography } from "@mui/material";
 import { IDefaultComponentsProps } from "shared/types/props.types";
-import { typePriority } from "../../model";
 import CheckIcon from "@mui/icons-material/Check";
 import FlagIcon from "@mui/icons-material/Flag";
+import { typePriority } from "shared/ui/boxes";
 
 interface IProps extends IDefaultComponentsProps {
   priority: typePriority;
@@ -21,7 +21,7 @@ export const PriorityItem: React.FC<IProps> = (props) => {
       onClick={onSelect}
       sx={{ backgroundColor: isSelected ? "#33333310" : "", ...styleCSS }}
     >
-      <FlagIcon color="primary" className="icon" />
+      <FlagIcon color="primary"/>
       <Typography color="textPrimary" fontSize={"12px"}>
         {priority}
       </Typography>

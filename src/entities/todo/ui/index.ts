@@ -1,4 +1,3 @@
-export { TodoDetail } from "./Todo.detail";
-export { TodoItem } from "./Todo.item";
-
+export * from "./todo";
+export * from "./section";
 export * from "./components";

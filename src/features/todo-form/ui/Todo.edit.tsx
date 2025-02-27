@@ -3,42 +3,66 @@ import classNames from "classnames";
 import "./style.scss";
 import { Box, Button, Divider, IconButton, InputBase, List, ListItem, Paper, Stack } from "@mui/material";
 import { TagsEditor, PriorityEditor, DateCalendar } from "./components";
-import { ListProperties } from "entities/todo";
+import { ITodo, ListProperties } from "entities/todo";
 import { IDefaultComponentsProps } from "shared/types/props.types";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { typeFormInput } from "../model/type";
+import { idGenerator } from "shared/lib/utils";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import AddIcon from "@mui/icons-material/Add";
 
-interface IProps extends IDefaultComponentsProps {}
+interface IProps extends IDefaultComponentsProps {
+  onAddedTodo: (todo: ITodo) => void;
+}
 
 export const TodoEdit: React.FC<IProps> = (props) => {
-  const { className, styleCSS } = props;
+  const { className, styleCSS, onAddedTodo } = props;
+
   const [fullForm, setFullForm] = useState(false);
-  const { control, handleSubmit, watch } = useForm<typeFormInput>({defaultValues: {
-    tags: []
-  }});
+  const {
+    control,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm<typeFormInput>({
+    defaultValues: {
+      tags: [],
+    },
+  });
 
   const toggleWrapForm = () => {
     setFullForm(!fullForm);
   };
 
   const onSubmit: SubmitHandler<typeFormInput> = (data) => {
-    console.log(data);
+    onAddedTodo({ id: idGenerator(), dateCreated: "", dateUpdated: "", isCompleted: false, ...data });
+    reset({
+      title: "",
+      description: "",
+      tags: [],
+      deadline: undefined,
+      priority: undefined,
+    });
   };
 
   const mods = {
     ["hiden"]: !fullForm,
   };
 
+  const modsPaper = {
+    ["todo-edit-error"]: errors.title,
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={classNames(mods)}>
-      <Paper className={classNames(className, "paper")} sx={styleCSS} elevation={4}>
-        <Box className="head">
+      <Paper className={classNames(className, "todo-edit", modsPaper)} sx={styleCSS} elevation={4}>
+        <Box className="todo-edit-head">
           <Stack className="todo-title">
             <Controller
               name="title"
               control={control}
+              rules={{ required: true }}
               render={({ field }) => (
                 <InputBase {...field} className="input-name" fullWidth placeholder="Task name" id="outlined-basic" />
               )}

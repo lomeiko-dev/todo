@@ -1,10 +1,9 @@
 import { Box, Checkbox, Container, Divider, Stack } from "@mui/material";
-import { TodoHead } from "./components/TodoHead";
-import { DateBox, PriorityBox } from "shared/ui/Boxes";
-import { TagList } from "./components/TagList";
-import { ITodo } from "../model/types/types";
+import { DateBox, PriorityBox } from "shared/ui/boxes";
 import React from "react";
-import './style.scss'
+import '../style.scss'
+import { ITodo } from "entities/todo/model";
+import { TagList, TodoHead } from "../components";
 
 interface IProps {
   todo: ITodo;
@@ -21,7 +20,7 @@ export const TodoDetail: React.FC<IProps> = (props) => {
           <TodoHead description={todo.description} title={todo.title} />
           <Divider />
           <Box className={"foot"}>
-            <DateBox date={todo.deadline} />
+            <DateBox date={todo.deadline.format('DD/MM/YYYY')} />
             <PriorityBox priority={todo.priority} />
             <TagList tags={todo.tags || []} />
           </Box>

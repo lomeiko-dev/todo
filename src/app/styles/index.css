@@ -1,2 +1,11 @@
-@import './normalize.css'
+@import './normalize.css';
 
+.MuiList-root{
+    margin: 0 !important;
+    padding: 0 !important;
+
+    .MuiListItem-root{
+        margin: 0;
+        padding: 5px 0;
+    }
+}

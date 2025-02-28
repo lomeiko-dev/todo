@@ -1,6 +1,6 @@
 import { createEntityAdapter } from "@reduxjs/toolkit";
-import { ITodo } from "../../types";
+import { ISectionTodos } from "../types/types";
 
 export const todoAdapter = createEntityAdapter({
-  selectId: (todo: ITodo) => todo.id,
+  selectId: (section: ISectionTodos) => section.id,
 });

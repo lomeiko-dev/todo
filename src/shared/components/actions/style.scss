@@ -1,0 +1,22 @@
+.stack-todo-menu{
+    display: flex;
+    flex-direction: row !important;
+    align-items: center;
+    gap: 5px;
+    margin-left: 10px;
+
+    .fab{
+        min-height: 24px;
+        opacity: .5;
+        transition: opacity 0.5s ease-in-out;
+
+        &:hover{
+            opacity: 1;
+        }
+
+        .icon{
+            width: 16px;
+            height: 16px;
+        }
+    }
+}

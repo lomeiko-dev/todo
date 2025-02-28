@@ -1,1 +1,1 @@
-export type { ICommentTodo, ITagTodo, ITodo, typePriority } from "./types";
+export type { ICommentTodo, ITodo, ISectionTodos } from "./types";

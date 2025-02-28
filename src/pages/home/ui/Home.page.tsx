@@ -1,31 +1,18 @@
 import { Layout } from "widgets/layout";
-import { ITodo, SectionItem, todoAdded, todoSelector } from "entities/todo";
-import { useAppDispatch, useAppSelector } from "shared/lib/hooks";
-import { TodoList } from "widgets/todo-list";
-import { TodoEdit } from "features/todo-form";
+import "./style.scss";
+import { todoSelector } from "entities/todo";
+import { useAppSelector } from "shared/lib/hooks";
+import { TodoSectionList } from "widgets/todo-view";
+import { TodoEditWidget } from "widgets/todo-form";
 
 const HomePage = () => {
-  const todos = useAppSelector(todoSelector.selectAll);
-  const dispatch = useAppDispatch();
+  const sections = useAppSelector(todoSelector.selectAll);
 
-  const handleAddedTodo = (todo: ITodo) => {
-    dispatch(todoAdded(todo));
-  };
   return (
-    <div>
-      <Layout>
-        <TodoEdit onAddedTodo={handleAddedTodo} />
-        <SectionItem name="My tasks">
-          <TodoList todos={todos} />
-        </SectionItem>
-        <SectionItem name="My tasks">
-          <TodoList todos={todos} />
-        </SectionItem>
-        <SectionItem name="My tasks">
-          <TodoList todos={todos} />
-        </SectionItem>
-      </Layout>
-    </div>
+    <Layout>
+      <TodoEditWidget />
+      <TodoSectionList sections={sections} />
+    </Layout>
   );
 };
 

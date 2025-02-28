@@ -4,6 +4,10 @@
     align-items: center !important;
 }
 
+.todo-form {
+    width: 100%;
+}
+
 .todo-edit {
     padding: 10px;
     margin: 10px 0;
@@ -17,26 +21,29 @@
         border-radius: 5px;
         padding: 1px;
         max-width: 100% !important;
+    }
 
-        .todo-title {
-            @include row-center;
+    .todo-title {
+        @include row-center;
 
-            .input-name {
-                .MuiInputBase-input {
-                    font-size: 18px;
-                }
+        .input-name {
+            padding: 0 !important;
+            margin: 0 !important;
+
+            .MuiInputBase-input {
+                font-size: 18px;
             }
         }
+    }
 
-        .input-descr {
-            .MuiInputBase-input {
-                font-size: 14px !important;
-            }
+    .input-descr {
+        .MuiInputBase-input {
+            font-size: 14px !important;
         }
     }
 }
 
-.todo-edit-error{
+.todo-edit-error {
     border: 1px solid red;
 
     .input-name {
@@ -72,9 +79,9 @@
 }
 
 .hiden {
-    .paper {
+    .todo-edit {
         height: max-content;
-        padding: 0 10px;
+        padding: 0 10px !important;
     }
 
     .input-name {
@@ -89,29 +96,5 @@
     .todo-edit-list-properties,
     .properties-manage {
         display: none !important;
-    }
-}
-
-.stack-todo-menu{
-    display: flex;
-    flex-direction: row !important;
-    align-items: center;
-    gap: 5px;
-
-    .fab{
-        width: 24px;
-        height: 24px;
-        min-height: 24px;
-        opacity: .5;
-        transition: opacity 0.5s ease-in-out;
-
-        &:hover{
-            opacity: 1;
-        }
-
-        .icon{
-            width: 12px;
-            height: 12px;
-        }
     }
 }

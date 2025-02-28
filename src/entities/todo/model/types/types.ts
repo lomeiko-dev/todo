@@ -21,6 +21,8 @@ export interface ITodo {
   priority: typePriority;
 }
 
-export interface ITodoState {
+export interface ISectionTodos {
+  id: string;
+  title: string;
   todos: ITodo[];
 }

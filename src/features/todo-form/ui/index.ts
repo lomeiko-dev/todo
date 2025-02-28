@@ -1,3 +1,3 @@
 export { TodoEdit } from "./Todo.edit";
-export { TodoMenu } from "./Todo.menu";
+export { SectionEdit } from "./Section.edit";
 export * from "./components";

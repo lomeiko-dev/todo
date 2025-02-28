@@ -1,0 +1,10 @@
+.home-page-empty{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+
+    .todo-edit-full-width{
+        width: 100% !important;
+    }
+}

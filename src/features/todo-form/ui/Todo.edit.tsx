@@ -6,7 +6,7 @@ import { TagsEditor, PriorityEditor, DateCalendar } from "./components";
 import { ITodo, ListProperties } from "entities/todo";
 import { IDefaultComponentsProps } from "shared/types/props.types";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { typeFormInput } from "../model/type";
+import { typeFormTodoInput } from "../model/type";
 import { idGenerator } from "shared/lib/utils";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import AddIcon from "@mui/icons-material/Add";
@@ -25,7 +25,7 @@ export const TodoEdit: React.FC<IProps> = (props) => {
     watch,
     reset,
     formState: { errors },
-  } = useForm<typeFormInput>({
+  } = useForm<typeFormTodoInput>({
     defaultValues: {
       tags: [],
     },
@@ -35,7 +35,7 @@ export const TodoEdit: React.FC<IProps> = (props) => {
     setFullForm(!fullForm);
   };
 
-  const onSubmit: SubmitHandler<typeFormInput> = (data) => {
+  const onSubmit: SubmitHandler<typeFormTodoInput> = (data) => {
     onAddedTodo({ id: idGenerator(), dateCreated: "", dateUpdated: "", isCompleted: false, ...data });
     reset({
       title: "",
@@ -55,7 +55,7 @@ export const TodoEdit: React.FC<IProps> = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={classNames(mods)}>
+    <form onSubmit={handleSubmit(onSubmit)} className={classNames('todo-form', mods)}>
       <Paper className={classNames(className, "todo-edit", modsPaper)} sx={styleCSS} elevation={4}>
         <Box className="todo-edit-head">
           <Stack className="todo-title">

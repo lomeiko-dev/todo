@@ -8,11 +8,11 @@ import { ITodo } from "entities/todo/model";
 
 interface IProps extends IDefaultComponentsProps {
   todo: ITodo;
-  menuSlot?: React.ReactNode;
+  actionSlot?: React.ReactNode;
 }
 
 export const TodoItem: React.FC<IProps> = (props) => {
-  const { todo, className, styleCSS, menuSlot } = props;
+  const { todo, className, styleCSS, actionSlot } = props;
 
   const [hover, setHover] = useState(false);
 
@@ -34,7 +34,7 @@ export const TodoItem: React.FC<IProps> = (props) => {
             <Checkbox className="todo-checkbox" />
             <TodoHead lineClamp={2} description={todo.description} title={todo.title} />
           </Box>
-          {hover ? <div className="todo-item-menu-slot">{menuSlot}</div> : null}
+          {hover ? <div className="todo-item-menu-slot">{actionSlot}</div> : null}
         </Box>
         <Divider />
         <ListProperties className="foot" deadline={todo.deadline} priority={todo.priority} tags={todo.tags} />

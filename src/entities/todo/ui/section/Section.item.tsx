@@ -15,14 +15,18 @@ export const SectionItem: React.FC<IProps> = (props) => {
 
   const [hover, setHover] = useState(false);
 
-  const handleToggleHover = () => {
-    setHover(!hover);
+  const handleMouseEnter = () => {
+    setHover(true);
+  };
+
+  const handleMouseLeave = () => {
+    setHover(false);
   };
 
   return (
     <Accordion
-      onMouseEnter={handleToggleHover}
-      onMouseLeave={handleToggleHover}
+      onMouseEnter={(handleMouseEnter)}
+      onMouseLeave={handleMouseLeave}
       defaultExpanded
       className={classNames(className, "section-todo-accardion")}
       sx={styleCSS}

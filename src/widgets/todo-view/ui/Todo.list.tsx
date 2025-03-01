@@ -1,36 +1,63 @@
 import { useState } from "react";
 import classNames from "classnames";
 import { useAppDispatch } from "shared/lib/hooks";
-import { Button, Divider, List, ListItem } from "@mui/material";
+import { Button, Dialog, Divider, List, ListItem } from "@mui/material";
 import { TodoEdit } from "features/todo-form";
 import { BaseActions } from "shared/components/actions";
-import { ITodo, todoAdded, TodoItem } from "entities/todo";
+import { ITodo, todoAdded, TodoItem, todoRemoved, todoUpdated } from "entities/todo";
 import { IDefaultComponentsProps } from "shared/types/props.types";
 import AddIcon from "@mui/icons-material/Add";
 
 interface IProps extends IDefaultComponentsProps {
+  idSection?: string;
   todos: ITodo[];
 }
 
 export const TodoList: React.FC<IProps> = (props) => {
-  const { todos, className, styleCSS } = props;
+  const { todos, className, styleCSS, idSection = "new-todo" } = props;
 
   const dispatch = useAppDispatch();
   const [showForm, setShow] = useState(false);
+  const [isChanged, setChange] = useState(false);
 
   const toggleShowForm = () => {
     setShow(!showForm);
   };
 
+  const toggleChanged = () => {
+    setChange(!isChanged);
+  };
+
   const handleAddedTodo = (data: ITodo) => {
-    dispatch(todoAdded({ idSection: "new-todo", data }));
+    dispatch(todoAdded({ idSection, data }));
+    toggleShowForm();
+  };
+
+  const handleUpdateTodo = (idTodo: string, newData: ITodo) => {
+    dispatch(todoUpdated({ idSection, idTodo, newData }));
+    toggleChanged();
+  };
+
+  const handleTodoRemoved = (idTodo: string) => {
+    dispatch(todoRemoved({ idSection, idTodo }));
   };
 
   return (
     <List className={classNames(className)} sx={styleCSS}>
       {todos.map((todo) => (
         <ListItem>
-          <TodoItem actionSlot={<BaseActions onEdit={() => null} onRemove={() => null}/>} todo={todo} />
+          <TodoItem
+            actionSlot={<BaseActions onEdit={toggleChanged} onRemove={() => handleTodoRemoved(todo.id)} />}
+            todo={todo}
+          />
+          <Dialog sx={{ "& .MuiDialog-paper": { width: "100%" } }} open={isChanged} onClose={toggleChanged}>
+            <TodoEdit
+              isChenged
+              isFullForm={true}
+              initialTodo={todo}
+              onAddedTodo={(data) => handleUpdateTodo(todo.id, data)}
+            />
+          </Dialog>
         </ListItem>
       ))}
       {showForm ? (

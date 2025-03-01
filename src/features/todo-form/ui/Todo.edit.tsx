@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ComponentPropsWithoutRef, useState } from "react";
 import classNames from "classnames";
 import "./style.scss";
 import { Box, Button, Divider, IconButton, InputBase, List, ListItem, Paper, Stack } from "@mui/material";
@@ -11,14 +11,25 @@ import { idGenerator } from "shared/lib/utils";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import AddIcon from "@mui/icons-material/Add";
 
-interface IProps extends IDefaultComponentsProps {
+interface IProps extends IDefaultComponentsProps, ComponentPropsWithoutRef<"form"> {
   onAddedTodo: (todo: ITodo) => void;
+  initialTodo?: typeFormTodoInput;
+  isFullForm?: boolean;
+  isChenged?: boolean;
 }
 
 export const TodoEdit: React.FC<IProps> = (props) => {
-  const { className, styleCSS, onAddedTodo } = props;
+  const {
+    className,
+    styleCSS,
+    onAddedTodo,
+    initialTodo = { tags: [] },
+    isFullForm = false,
+    isChenged = false,
+    ...other
+  } = props;
 
-  const [fullForm, setFullForm] = useState(false);
+  const [fullForm, setFullForm] = useState(isFullForm);
   const {
     control,
     handleSubmit,
@@ -26,9 +37,7 @@ export const TodoEdit: React.FC<IProps> = (props) => {
     reset,
     formState: { errors },
   } = useForm<typeFormTodoInput>({
-    defaultValues: {
-      tags: [],
-    },
+    defaultValues: initialTodo,
   });
 
   const toggleWrapForm = () => {
@@ -55,8 +64,8 @@ export const TodoEdit: React.FC<IProps> = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={classNames('todo-form', mods)}>
-      <Paper className={classNames(className, "todo-edit", modsPaper)} sx={styleCSS} elevation={4}>
+    <form {...other} onSubmit={handleSubmit(onSubmit)} className={classNames("todo-form", mods)}>
+      <Paper className={classNames(className, "todo-edit", modsPaper)} sx={styleCSS}>
         <Box className="todo-edit-head">
           <Stack className="todo-title">
             <Controller
@@ -67,15 +76,16 @@ export const TodoEdit: React.FC<IProps> = (props) => {
                 <InputBase {...field} className="input-name" fullWidth placeholder="Task name" id="outlined-basic" />
               )}
             />
-
-            <Stack className="todo-manage">
-              <IconButton type="submit" color="primary">
-                <AddIcon />
-              </IconButton>
-              <IconButton onClick={toggleWrapForm} color="secondary">
-                <MoreHorizIcon />
-              </IconButton>
-            </Stack>
+            {!isFullForm && (
+              <Stack className="todo-manage">
+                <IconButton type="submit" color="primary">
+                  <AddIcon />
+                </IconButton>
+                <IconButton onClick={toggleWrapForm} color="secondary">
+                  <MoreHorizIcon />
+                </IconButton>
+              </Stack>
+            )}
           </Stack>
           <Controller
             name="description"
@@ -100,7 +110,7 @@ export const TodoEdit: React.FC<IProps> = (props) => {
             tags={watch("tags")}
           />
         </Box>
-        <Divider className="todo-edit-devider"/>
+        <Divider className="todo-edit-devider" />
         <Stack className="properties-manage">
           <List className="properties-list">
             <ListItem className="properties-list-item">
@@ -126,7 +136,7 @@ export const TodoEdit: React.FC<IProps> = (props) => {
               Back
             </Button>
             <Button type="submit" size="small" variant="contained" color="primary">
-              Create
+              {isChenged ? "update" : "create"}
             </Button>
           </Stack>
         </Stack>

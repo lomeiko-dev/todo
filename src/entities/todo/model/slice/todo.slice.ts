@@ -26,8 +26,10 @@ const todoSlice = createSlice({
       const section = state.entities[idSection];
 
       if (section) {
-        let todo = section.todos.find((item) => item.id === idTodo);
-        todo = { ...newData };
+        const index = section.todos.findIndex((item) => item.id === idTodo);
+        if (index !== -1) {
+          section.todos[index] = newData;
+        }
       }
     },
 
@@ -55,4 +57,13 @@ const todoSlice = createSlice({
 
 export const todoSliceReducer = todoSlice.reducer;
 
-export const { todoAdded } = todoSlice.actions;
+export const {
+  loadFromLocalStorage,
+  saveToLocalStorage,
+  sectionAdded,
+  sectionRemoved,
+  sectionUpdated,
+  todoAdded,
+  todoRemoved,
+  todoUpdated,
+} = todoSlice.actions;

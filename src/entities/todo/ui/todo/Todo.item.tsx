@@ -9,11 +9,12 @@ import { ITodo } from "entities/todo/model";
 interface IProps extends IDefaultComponentsProps {
   todo: ITodo;
   onChecked: () => void;
+  onClick: () => void;
   actionSlot?: React.ReactNode;
 }
 
 export const TodoItem: React.FC<IProps> = (props) => {
-  const { todo, className, styleCSS, actionSlot, onChecked } = props;
+  const { todo, className, styleCSS, actionSlot, onChecked, onClick } = props;
 
   const [hover, setHover] = useState(false);
 
@@ -27,6 +28,7 @@ export const TodoItem: React.FC<IProps> = (props) => {
 
   return (
     <Paper
+      onClick={onClick}
       onMouseEnter={toggleHover}
       onMouseLeave={toggleHover}
       className={classNames(className, "todo-item", mods)}

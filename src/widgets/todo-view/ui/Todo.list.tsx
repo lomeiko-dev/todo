@@ -4,7 +4,7 @@ import { useAppDispatch } from "shared/lib/hooks";
 import { Button, Dialog, Divider, List, ListItem } from "@mui/material";
 import { TodoEdit } from "features/todo-form";
 import { BaseActions } from "shared/components/actions";
-import { ITodo, todoAdded, TodoItem, todoRemoved, todoToggleChecked, todoUpdated } from "entities/todo";
+import { ITodo, todoAdded, TodoDetail, TodoItem, todoRemoved, todoToggleChecked, todoUpdated } from "entities/todo";
 import { IDefaultComponentsProps } from "shared/types/props.types";
 import AddIcon from "@mui/icons-material/Add";
 
@@ -18,7 +18,12 @@ export const TodoList: React.FC<IProps> = (props) => {
 
   const dispatch = useAppDispatch();
   const [showForm, setShow] = useState(false);
+  const [showTodo, setShowTodo] = useState(false);
   const [isChanged, setChange] = useState(false);
+
+  const toggleShowTodo = () => {
+    setShowTodo(!showTodo);
+  }
 
   const toggleShowForm = () => {
     setShow(!showForm);
@@ -51,10 +56,14 @@ export const TodoList: React.FC<IProps> = (props) => {
       {todos.map((todo) => (
         <ListItem>
           <TodoItem
+            onClick={toggleShowTodo}
             onChecked={() => handleTodoChecked(todo.id)}
             actionSlot={<BaseActions onEdit={toggleChanged} onRemove={() => handleTodoRemoved(todo.id)} />}
             todo={todo}
           />
+          <Dialog sx={{ "& .MuiDialog-paper": { width: "100%" } }} open={showTodo} onClose={toggleShowTodo}>
+            <TodoDetail todo={todo}/>
+          </Dialog>
           <Dialog sx={{ "& .MuiDialog-paper": { width: "100%" } }} open={isChanged} onClose={toggleChanged}>
             <TodoEdit
               isChenged

@@ -8,11 +8,12 @@ import { ITodo } from "entities/todo/model";
 
 interface IProps extends IDefaultComponentsProps {
   todo: ITodo;
+  onChecked: () => void;
   actionSlot?: React.ReactNode;
 }
 
 export const TodoItem: React.FC<IProps> = (props) => {
-  const { todo, className, styleCSS, actionSlot } = props;
+  const { todo, className, styleCSS, actionSlot, onChecked } = props;
 
   const [hover, setHover] = useState(false);
 
@@ -20,19 +21,23 @@ export const TodoItem: React.FC<IProps> = (props) => {
     setHover(!hover);
   };
 
+  const mods = {
+    ["todo-item-complete"]: todo.isCompleted,
+  };
+
   return (
     <Paper
       onMouseEnter={toggleHover}
       onMouseLeave={toggleHover}
-      className={classNames(className, "todo-item")}
+      className={classNames(className, "todo-item", mods)}
       style={styleCSS}
       elevation={hover ? 12 : 4}
     >
       <Box className="todo-item-content">
         <Box className="todo-item-content-inner">
           <Box className="todo-item-content-left">
-            <Checkbox className="todo-checkbox" />
-            <TodoHead lineClamp={2} description={todo.description} title={todo.title} />
+            <Checkbox checked={todo.isCompleted} className="todo-checkbox" onChange={onChecked} />
+            <TodoHead isCross={todo.isCompleted} lineClamp={2} description={todo.description} title={todo.title} />
           </Box>
           {hover ? <div className="todo-item-menu-slot">{actionSlot}</div> : null}
         </Box>

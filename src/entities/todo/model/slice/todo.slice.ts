@@ -11,6 +11,18 @@ const todoSlice = createSlice({
     sectionRemoved: todoAdapter.removeOne,
     sectionUpdated: todoAdapter.updateOne,
 
+    todoToggleChecked: (state, action: PayloadAction<{ idSection: string; id: string }>) => {
+      const { id, idSection } = action.payload;
+      const section = state.entities[idSection];
+
+      if (section) {
+        const index = section.todos.findIndex((item) => item.id === id);
+        if (index !== -1) {
+          section.todos[index].isCompleted = !section.todos[index].isCompleted;
+        }
+      }
+    },
+
     todoAdded: (state, payload: PayloadAction<{ idSection: string; data: ITodo }>) => {
       const { data, idSection } = payload.payload;
       const section = state.entities[idSection];
@@ -66,4 +78,5 @@ export const {
   todoAdded,
   todoRemoved,
   todoUpdated,
+  todoToggleChecked
 } = todoSlice.actions;

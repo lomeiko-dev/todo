@@ -4,7 +4,7 @@ import { useAppDispatch } from "shared/lib/hooks";
 import { Button, Dialog, Divider, List, ListItem } from "@mui/material";
 import { TodoEdit } from "features/todo-form";
 import { BaseActions } from "shared/components/actions";
-import { ITodo, todoAdded, TodoItem, todoRemoved, todoUpdated } from "entities/todo";
+import { ITodo, todoAdded, TodoItem, todoRemoved, todoToggleChecked, todoUpdated } from "entities/todo";
 import { IDefaultComponentsProps } from "shared/types/props.types";
 import AddIcon from "@mui/icons-material/Add";
 
@@ -42,11 +42,16 @@ export const TodoList: React.FC<IProps> = (props) => {
     dispatch(todoRemoved({ idSection, idTodo }));
   };
 
+  const handleTodoChecked = (id: string) => {
+    dispatch(todoToggleChecked({ idSection, id }));
+  };
+
   return (
     <List className={classNames(className)} sx={styleCSS}>
       {todos.map((todo) => (
         <ListItem>
           <TodoItem
+            onChecked={() => handleTodoChecked(todo.id)}
             actionSlot={<BaseActions onEdit={toggleChanged} onRemove={() => handleTodoRemoved(todo.id)} />}
             todo={todo}
           />

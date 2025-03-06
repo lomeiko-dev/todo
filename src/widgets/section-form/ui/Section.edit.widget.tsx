@@ -30,10 +30,11 @@ export const SectionEditWidget: React.FC<IProps> = (props) => {
       <Button
         onClick={handleToggleForm}
         color="secondary"
-        sx={{ height: "60px" }}
+        sx={{ height: "50px" }}
         size="large"
         fullWidth
         endIcon={<AddIcon />}
+        variant="outlined"
       >
         <Typography>section</Typography>
       </Button>

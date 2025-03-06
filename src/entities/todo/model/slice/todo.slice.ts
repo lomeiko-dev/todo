@@ -63,6 +63,8 @@ const todoSlice = createSlice({
       const tasks = data ? JSON.parse(data) : [];
 
       todoAdapter.setAll(state, tasks);
+
+      console.log(tasks);
     },
   },
 });
@@ -78,5 +80,5 @@ export const {
   todoAdded,
   todoRemoved,
   todoUpdated,
-  todoToggleChecked
+  todoToggleChecked,
 } = todoSlice.actions;

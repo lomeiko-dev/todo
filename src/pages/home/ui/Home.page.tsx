@@ -30,7 +30,6 @@ const HomePage = () => {
       <Page namePage={RoutePath.home.pageName}>
         <TodoViewActions styleCSS={{ marginTop: "15px" }} alignment="list" onAction={() => null} />
         <TodoSectionList sections={sections} />
-        <SectionEditWidget />
       </Page>
     </Layout>
   );

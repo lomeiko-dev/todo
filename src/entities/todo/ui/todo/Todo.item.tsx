@@ -16,12 +16,15 @@ interface IProps extends IDefaultComponentsProps {
 export const TodoItem: React.FC<IProps> = (props) => {
   const { todo, className, styleCSS, actionSlot, onChecked, onClick } = props;
 
-  console.log('rerender todo', todo.title)
-
   const [hover, setHover] = useState(false);
 
   const toggleHover = () => {
     setHover(!hover);
+  };
+
+  const handleChange = (e: any) => {
+    e.stopPropagation();
+    onChecked(todo.id);
   };
 
   const mods = {
@@ -30,7 +33,12 @@ export const TodoItem: React.FC<IProps> = (props) => {
 
   return (
     <Paper
-      onClick={onClick}
+      onClick={(e) => {
+        if ((e.target as HTMLElement).closest(".todo-checkbox")) {
+          return;
+        }
+        onClick();
+      }}
       onMouseEnter={toggleHover}
       onMouseLeave={toggleHover}
       className={classNames(className, "todo-item", mods)}
@@ -40,7 +48,7 @@ export const TodoItem: React.FC<IProps> = (props) => {
       <Box className="todo-item-content">
         <Box className="todo-item-content-inner">
           <Box className="todo-item-content-left">
-            <Checkbox checked={todo.isCompleted} className="todo-checkbox" onChange={() => onChecked(todo.id)} />
+            <Checkbox checked={todo.isCompleted} className="todo-checkbox" onChange={handleChange} />
             <TodoHead isCross={todo.isCompleted} lineClamp={2} description={todo.description} title={todo.title} />
           </Box>
           {hover ? <div className="todo-item-menu-slot">{actionSlot}</div> : null}

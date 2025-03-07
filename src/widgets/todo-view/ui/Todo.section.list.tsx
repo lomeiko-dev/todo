@@ -1,13 +1,15 @@
-import classNames from "classnames";
-import { Box, Dialog, List, ListItem, Snackbar } from "@mui/material";
-import { TodoList } from "./Todo.list";
 import { useState } from "react";
-import { useAppDispatch } from "shared/lib/hooks";
+import classNames from "classnames";
+import { useCrudSection } from "../model/lib/hooks/useCrudSection";
+import { useCrudTodo } from "../model/lib/hooks/useCrudTodo";
+import { Box, Button, Dialog, List, ListItem, Snackbar, Typography } from "@mui/material";
+import { TodoList } from "./Todo.list";
 import { SectionEdit, TodoEdit } from "features/todo-form";
 import { SnackbarAction } from "./components/Snackbar.action";
 import { BaseActions } from "shared/components/actions";
-import { ISectionTodos, ITodo, SectionItem, sectionRemoved, sectionUpdated, todoAdded } from "entities/todo";
+import { ISectionTodos, SectionItem } from "entities/todo";
 import { IDefaultComponentsProps } from "shared/types/props.types";
+import AddIcon from "@mui/icons-material/Add";
 
 interface IProps extends IDefaultComponentsProps {
   sections: ISectionTodos[];
@@ -16,13 +18,9 @@ interface IProps extends IDefaultComponentsProps {
 export const TodoSectionList: React.FC<IProps> = (props) => {
   const { sections, className, styleCSS } = props;
 
-  const dispatch = useAppDispatch();
   const [confirmation, setConfirmation] = useState(false);
   const [changed, setChanged] = useState(false);
-
-  const handleAddedTodo = (data: ITodo, idSection?: string) => {
-    dispatch(todoAdded({ idSection: idSection === undefined ? "new-todo" : idSection, data }));
-  };
+  const [showForm, setShow] = useState(false);
 
   const handleToggleConfirmation = () => {
     setConfirmation(!confirmation);
@@ -32,15 +30,17 @@ export const TodoSectionList: React.FC<IProps> = (props) => {
     setChanged(!changed);
   };
 
-  const hanldeSectionRemoveConfirmation = (sectionId: string) => {
-    dispatch(sectionRemoved(sectionId));
-    setConfirmation(false);
+  const handleToggleForm = () => {
+    setShow(!showForm);
   };
 
-  const handleSectionChanged = (id: string, changes: ISectionTodos) => {
-    dispatch(sectionUpdated({ id, changes }));
-    handleToggleChanged();
-  };
+  const { handleAddedSection, handleSectionChanged, handleSectionRemoveConfirmation } = useCrudSection({
+    onCloseFormChanged: handleToggleChanged,
+    onCloseFormCreated: handleToggleForm,
+    onCloseFormRemoving: handleToggleConfirmation,
+  });
+
+  const {handleAddedTodo} = useCrudTodo('new-section')
 
   return (
     <Box className={classNames(className)} style={styleCSS}>
@@ -56,12 +56,12 @@ export const TodoSectionList: React.FC<IProps> = (props) => {
             </SectionItem>
             <Snackbar
               open={confirmation}
-              onClose={handleToggleConfirmation}
+              onClose={() => setConfirmation(false)}
               message="do you really want to delete the partition?"
               action={
                 <SnackbarAction
-                  onClose={handleToggleConfirmation}
-                  onConfirm={() => hanldeSectionRemoveConfirmation(section.id)}
+                  onClose={(handleToggleConfirmation)}
+                  onConfirm={() => handleSectionRemoveConfirmation(section.id)}
                 />
               }
             />
@@ -76,6 +76,20 @@ export const TodoSectionList: React.FC<IProps> = (props) => {
           </ListItem>
         ))}
       </List>
+      <Button
+        onClick={handleToggleForm}
+        color="secondary"
+        sx={{ height: "50px" }}
+        size="large"
+        fullWidth
+        endIcon={<AddIcon />}
+        variant="outlined"
+      >
+        <Typography>section</Typography>
+      </Button>
+      <Dialog open={showForm} onClose={handleToggleForm}>
+        <SectionEdit onClose={handleToggleForm} onAddedSection={handleAddedSection} />
+      </Dialog>
     </Box>
   );
 };

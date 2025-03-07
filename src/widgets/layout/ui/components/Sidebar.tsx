@@ -39,7 +39,7 @@ interface IProps extends IDefaultComponentsProps {
 
 const projects = ["Project Alpha", "Project Beta", "Client Dashboard", "Internal Tool"];
 
-export const Sidebar: React.FC<IProps> = (props) => {
+export const Sidebar: React.FC<IProps> = React.memo((props) => {
   const { drawerWidthPx, className, styleCSS, isOpen, onClose } = props;
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -174,4 +174,4 @@ export const Sidebar: React.FC<IProps> = (props) => {
       </Box>
     </Drawer>
   );
-};
+});

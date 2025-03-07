@@ -4,6 +4,7 @@ export const RoutePath: Record<enumPath, IRoutePath> = {
   [enumPath.home]: {
     path: "/home",
     isGuard: true,
+    pageName: 'Todo'
   },
   [enumPath.project]: {
     path: "/project/:id",

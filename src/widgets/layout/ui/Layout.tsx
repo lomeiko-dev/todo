@@ -1,8 +1,8 @@
-import { IDefaultComponentsProps } from "shared/types/props.types";
+import React, { useCallback, useState } from "react";
 import classNames from "classnames";
 import { Sidebar } from "./components/Sidebar";
-import { useState } from "react";
 import { Box, Container, IconButton } from "@mui/material";
+import { IDefaultComponentsProps } from "shared/types/props.types";
 import DehazeIcon from "@mui/icons-material/Dehaze";
 
 interface IProps extends IDefaultComponentsProps {
@@ -16,9 +16,9 @@ export const Layout: React.FC<IProps> = (props) => {
 
   const [active, setActive] = useState(true);
 
-  const toggleDrawer = () => {
+  const toggleDrawer = useCallback(() => {
     setActive(!active);
-  };
+  }, [active]);
 
   return (
     <div className={classNames(className)} style={styleCSS}>

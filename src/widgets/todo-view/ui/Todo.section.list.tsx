@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { Box, Button, Dialog, List, ListItem, Snackbar } from "@mui/material";
+import { Box, Dialog, List, ListItem, Snackbar } from "@mui/material";
 import { TodoList } from "./Todo.list";
 import { useState } from "react";
 import { useAppDispatch } from "shared/lib/hooks";
@@ -8,7 +8,6 @@ import { SnackbarAction } from "./components/Snackbar.action";
 import { BaseActions } from "shared/components/actions";
 import { ISectionTodos, ITodo, SectionItem, sectionRemoved, sectionUpdated, todoAdded } from "entities/todo";
 import { IDefaultComponentsProps } from "shared/types/props.types";
-import AddIcon from "@mui/icons-material/Add";
 
 interface IProps extends IDefaultComponentsProps {
   sections: ISectionTodos[];
@@ -20,11 +19,6 @@ export const TodoSectionList: React.FC<IProps> = (props) => {
   const dispatch = useAppDispatch();
   const [confirmation, setConfirmation] = useState(false);
   const [changed, setChanged] = useState(false);
-  const [showForm, setShowForm] = useState(false);
-
-  const toggleShowForm = () => {
-    setShowForm(!showForm);
-  };
 
   const handleAddedTodo = (data: ITodo, idSection?: string) => {
     dispatch(todoAdded({ idSection: idSection === undefined ? "new-todo" : idSection, data }));
@@ -53,19 +47,12 @@ export const TodoSectionList: React.FC<IProps> = (props) => {
       {sections.length === 0 && <TodoEdit className="todo-edit-full-width" onAddedTodo={handleAddedTodo} />}
       <List>
         {sections.map((section) => (
-          <ListItem>
+          <ListItem key={section.id}>
             <SectionItem
               actionSlot={<BaseActions onEdit={handleToggleChanged} onRemove={handleToggleConfirmation} />}
               name={section.title}
             >
               <TodoList idSection={section.id} todos={section.todos} />
-              {showForm ? (
-                <TodoEdit onAddedTodo={(todo) => handleAddedTodo(todo, section.id)} />
-              ) : (
-                <Button onClick={toggleShowForm} fullWidth>
-                  <AddIcon />
-                </Button>
-              )}
             </SectionItem>
             <Snackbar
               open={confirmation}

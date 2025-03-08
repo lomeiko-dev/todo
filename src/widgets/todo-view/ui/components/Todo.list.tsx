@@ -30,8 +30,10 @@ export const TodoList: React.FC<IProps> = React.memo((props) => {
   const [showForm, setShow] = useState(false);
   const [showTodo, setShowTodo] = useState(false);
   const [isChanged, setChange] = useState(false);
+  const [selectedTodo, setSelectedTodo] = useState<ITodo | null>(null);
 
-  const toggleShowTodo = () => {
+  const toggleShowTodo = (todo: ITodo) => {
+    setSelectedTodo(todo);
     setShowTodo(!showTodo);
   };
 
@@ -39,7 +41,8 @@ export const TodoList: React.FC<IProps> = React.memo((props) => {
     setShow(!showForm);
   };
 
-  const toggleChanged = () => {
+  const toggleChanged = (todo?: ITodo) => {
+    if (todo) setSelectedTodo(todo);
     setChange(!isChanged);
   };
 
@@ -53,20 +56,20 @@ export const TodoList: React.FC<IProps> = React.memo((props) => {
       {todos.map((todo) => (
         <ListItem>
           <TodoItem
-            onClick={toggleShowTodo}
+            onClick={() => toggleShowTodo(todo)}
             onChecked={(id) => handleToggleChecked(IdSection, id)}
-            actionSlot={<BaseActions onRemove={() => handleRemoved(IdSection, todo.id)} onEdit={toggleChanged} />}
+            actionSlot={<BaseActions onRemove={() => handleRemoved(IdSection, todo.id)} onEdit={() => toggleChanged(todo)} />}
             todo={todo}
           />
           <Dialog sx={{ "& .MuiDialog-paper": { width: "100%" } }} open={showTodo} onClose={toggleShowTodo}>
-            <TodoDetail todo={todo} />
+            <TodoDetail todo={selectedTodo || todo} />
           </Dialog>
-          <Dialog sx={{ "& .MuiDialog-paper": { width: "100%" } }} open={isChanged} onClose={toggleChanged}>
+          <Dialog sx={{ "& .MuiDialog-paper": { width: "100%" } }} open={isChanged} onClose={() => toggleChanged()}>
             <TodoEdit
               isChenged
               isFullForm={true}
               initialTodo={todo}
-              onAddedTodo={(data) => handleUpdateTodoWithCloseForm(todo.id, data)}
+              onAddedTodo={(data) => handleUpdateTodoWithCloseForm(selectedTodo?.id || '', data)}
               onBack={toggleChanged}
             />
           </Dialog>

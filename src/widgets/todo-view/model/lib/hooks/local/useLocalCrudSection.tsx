@@ -6,6 +6,7 @@ export const useLocalCrudSection = (): IHandlerCrud<ISectionTodos, string> => {
   const dispatch = useAppDispatch();
 
   const handleSectionRemoved = (sectionId: string) => {
+    console.log(sectionId)
     dispatch(sectionRemoved(sectionId));
   };
 

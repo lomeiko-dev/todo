@@ -22,11 +22,15 @@ export const SectionList: React.FC<IProps> = (props) => {
   const [changed, setChanged] = useState(false);
   const [showForm, setShow] = useState(false);
 
-  const handleToggleConfirmation = () => {
+  const [selectSection, setSelectSection] = useState<ISectionTodos | null>(null);
+
+  const handleToggleConfirmation = (section?: ISectionTodos) => {
+    if (section) setSelectSection(section);
     setConfirmation(!confirmation);
   };
 
-  const handleToggleChanged = () => {
+  const handleToggleChanged = (section?: ISectionTodos) => {
+    if (section) setSelectSection(section);
     setChanged(!changed);
   };
 
@@ -40,7 +44,12 @@ export const SectionList: React.FC<IProps> = (props) => {
         {sections.map((section) => (
           <ListItem key={section.id}>
             <SectionItem
-              actionSlot={<BaseActions onEdit={handleToggleChanged} onRemove={handleToggleConfirmation} />}
+              actionSlot={
+                <BaseActions
+                  onEdit={() => handleToggleChanged(section)}
+                  onRemove={() => handleToggleConfirmation(section)}
+                />
+              }
               name={section.title}
             >
               {Children.map(children, (child) => {
@@ -50,14 +59,14 @@ export const SectionList: React.FC<IProps> = (props) => {
             <Snackbar
               open={confirmation}
               onClose={() => setConfirmation(false)}
-              message="do you really want to delete the partition?"
-              action={<SnackbarAction onClose={handleToggleConfirmation} onConfirm={() => handleRemoved(section.id)} />}
+              message={`Do you really want to delete the partition ${selectSection?.title}?`}
+              action={<SnackbarAction onClose={handleToggleConfirmation} onConfirm={() => handleRemoved(selectSection?.id || '')} />}
             />
-            <Dialog open={changed} onClose={handleToggleChanged}>
+            <Dialog open={changed} onClose={() => handleToggleChanged()}>
               <SectionEdit
                 isChanged
-                initialSection={section}
-                onAddedSection={(newSection) => handleUpdated(section.id, newSection)}
+                initialSection={selectSection || section}
+                onAddedSection={(newSection) => handleUpdated(selectSection?.id || '', newSection)}
                 onClose={handleToggleChanged}
               />
             </Dialog>

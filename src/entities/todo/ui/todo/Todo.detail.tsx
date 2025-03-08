@@ -9,7 +9,7 @@ interface IProps {
   children?: React.ReactNode
 }
 
-export const TodoDetail: React.FC<IProps> = (props) => {
+const TodoDetail: React.FC<IProps> = (props) => {
   const { todo, children } = props;
 
   return (
@@ -23,3 +23,5 @@ export const TodoDetail: React.FC<IProps> = (props) => {
     </Container>
   );
 };
+
+export default TodoDetail;

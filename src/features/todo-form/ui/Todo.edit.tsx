@@ -42,6 +42,8 @@ export const TodoEdit: React.FC<IProps> = (props) => {
     defaultValues: initialTodo,
   });
 
+  console.log('отрисован')
+
   const toggleWrapForm = () => {
     setFullForm(!fullForm);
   };

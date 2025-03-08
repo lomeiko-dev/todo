@@ -25,7 +25,7 @@ export const SectionItem: React.FC<IProps> = (props) => {
 
   return (
     <Accordion
-      onMouseEnter={(handleMouseEnter)}
+      onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       defaultExpanded
       className={classNames(className, "section-todo-accardion")}

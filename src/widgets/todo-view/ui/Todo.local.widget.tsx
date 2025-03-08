@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "shared/lib/hooks";
 import { useLocalCrudSection } from "../model/lib/hooks/local/useLocalCrudSection";
 import { useLocalCrudTodo } from "../model/lib/hooks/local/useLocalCrudTodo";
@@ -13,8 +13,6 @@ export const TodoLocalWidget = () => {
 
   const dispatch = useAppDispatch();
 
-  const [lazy, setLazy] = useState(false)
-
   useEffect(() => {
     const eventUnload = () => {
       dispatch(saveToLocalStorage());
@@ -22,13 +20,12 @@ export const TodoLocalWidget = () => {
 
     dispatch(loadFromLocalStorage());
     window.addEventListener("unload", eventUnload);
-    setLazy(true)
   }, []);
 
   const todo = useAppSelector(todoSelector.selectAll);
 
   return (
-    <TodoWrap lazy={lazy} onAddedTodo={crudTodo.handleCreated}>
+    <TodoWrap  onAddedTodo={crudTodo.handleCreated}>
       <SectionList sections={todo} {...crudSection}>
         <TodoList todos={[]} IdSection="0" {...crudTodo} />
       </SectionList>

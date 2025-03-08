@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import classNames from "classnames";
 import { Button, Dialog, Divider, List, ListItem } from "@mui/material";
 import { TodoEdit } from "features/todo-form";
 import { BaseActions } from "shared/components/actions";
-import { ITodo, TodoDetail, TodoItem } from "entities/todo";
+import { ITodo, TodoDetail, TodoDetailLazy, TodoItem } from "entities/todo";
 import { IDefaultComponentsProps } from "shared/types/props.types";
 import { IHandlerCrudTodo } from "../../model/types/type";
 import AddIcon from "@mui/icons-material/Add";
+import { Backdrop } from "shared/ui/backdrop";
 
 interface IProps extends IDefaultComponentsProps, IHandlerCrudTodo<ITodo, string, string> {
   IdSection: string;
@@ -58,18 +59,22 @@ export const TodoList: React.FC<IProps> = React.memo((props) => {
           <TodoItem
             onClick={() => toggleShowTodo(todo)}
             onChecked={(id) => handleToggleChecked(IdSection, id)}
-            actionSlot={<BaseActions onRemove={() => handleRemoved(IdSection, todo.id)} onEdit={() => toggleChanged(todo)} />}
+            actionSlot={
+              <BaseActions onRemove={() => handleRemoved(IdSection, todo.id)} onEdit={() => toggleChanged(todo)} />
+            }
             todo={todo}
           />
           <Dialog sx={{ "& .MuiDialog-paper": { width: "100%" } }} open={showTodo} onClose={toggleShowTodo}>
-            <TodoDetail todo={selectedTodo || todo} />
+            <Suspense fallback={<Backdrop/>}>
+              <TodoDetailLazy todo={selectedTodo || todo} />
+            </Suspense>
           </Dialog>
           <Dialog sx={{ "& .MuiDialog-paper": { width: "100%" } }} open={isChanged} onClose={() => toggleChanged()}>
             <TodoEdit
               isChenged
               isFullForm={true}
               initialTodo={todo}
-              onAddedTodo={(data) => handleUpdateTodoWithCloseForm(selectedTodo?.id || '', data)}
+              onAddedTodo={(data) => handleUpdateTodoWithCloseForm(selectedTodo?.id || "", data)}
               onBack={toggleChanged}
             />
           </Dialog>

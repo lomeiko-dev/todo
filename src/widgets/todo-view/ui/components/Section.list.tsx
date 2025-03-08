@@ -56,27 +56,32 @@ export const SectionList: React.FC<IProps> = (props) => {
                 return cloneElement(child, { IdSection: section.id, todos: section.todos });
               })}
             </SectionItem>
-            <Snackbar
-              open={confirmation}
-              onClose={() => setConfirmation(false)}
-              message={`Do you really want to delete the partition ${selectSection?.title}?`}
-              action={<SnackbarAction onClose={handleToggleConfirmation} onConfirm={() => handleRemoved(selectSection?.id || '')} />}
-            />
-            <Dialog open={changed} onClose={() => handleToggleChanged()}>
-              <SectionEdit
-                isChanged
-                initialSection={selectSection || section}
-                onAddedSection={(newSection) => handleUpdated(selectSection?.id || '', newSection)}
-                onClose={handleToggleChanged}
-              />
-            </Dialog>
           </ListItem>
         ))}
+        <Snackbar
+          open={confirmation}
+          onClose={() => setConfirmation(false)}
+          message={`Do you really want to delete the partition ${selectSection?.title}?`}
+          action={
+            <SnackbarAction
+              onClose={handleToggleConfirmation}
+              onConfirm={() => handleRemoved(selectSection?.id || "")}
+            />
+          }
+        />
+        <Dialog open={changed} onClose={() => handleToggleChanged()}>
+          <SectionEdit
+            isChanged
+            initialSection={selectSection || undefined}
+            onAddedSection={(newSection) => handleUpdated(selectSection?.id || "", newSection)}
+            onClose={handleToggleChanged}
+          />
+        </Dialog>
       </List>
       <Button
         onClick={handleToggleForm}
         color="secondary"
-        sx={{ height: "50px" }}
+        sx={{ height: "50px", marginTop: '30px' }}
         size="large"
         fullWidth
         endIcon={<AddIcon />}

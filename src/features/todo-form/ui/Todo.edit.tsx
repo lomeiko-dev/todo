@@ -13,6 +13,7 @@ import AddIcon from "@mui/icons-material/Add";
 
 interface IProps extends IDefaultComponentsProps, ComponentPropsWithoutRef<"form"> {
   onAddedTodo: (todo: ITodo) => void;
+  onBack?: () => void;
   initialTodo?: typeFormTodoInput;
   isFullForm?: boolean;
   isChenged?: boolean;
@@ -26,6 +27,7 @@ export const TodoEdit: React.FC<IProps> = (props) => {
     initialTodo = { tags: [] },
     isFullForm = false,
     isChenged = false,
+    onBack,
     ...other
   } = props;
 
@@ -132,7 +134,7 @@ export const TodoEdit: React.FC<IProps> = (props) => {
             </ListItem>
           </List>
           <Stack className="todo-manage">
-            <Button size="small" variant="contained" color="error">
+            <Button onClick={onBack} size="small" variant="contained" color="error">
               Back
             </Button>
             <Button type="submit" size="small" variant="contained" color="primary">

@@ -1,3 +1,2 @@
-export { TodoSectionList } from "./Todo.section.list";
-export { TodoList } from "./Todo.list";
+export { TodoLocalWidget } from "./Todo.local.widget";
 export { TodoViewActions } from "./TodoView.actions";

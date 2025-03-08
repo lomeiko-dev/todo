@@ -12,18 +12,23 @@ import CheckIcon from "@mui/icons-material/Check";
 
 interface IProps extends IDefaultComponentsProps {
   onAddedSection: (section: ISectionTodos) => void;
+  initialSection?: ISectionTodos;
   onClose: () => void;
-  initialSection?: typeFormSectionInput;
   isChanged?: boolean;
 }
 
 export const SectionEdit: React.FC<IProps> = (props) => {
   const { className, styleCSS, onAddedSection, onClose, initialSection, isChanged } = props;
 
-  const { register, handleSubmit } = useForm<typeFormSectionInput>({ defaultValues: initialSection });
+  const { register, handleSubmit } = useForm<typeFormSectionInput>({ defaultValues: { name: initialSection?.title } });
 
   const onSubmit: SubmitHandler<typeFormSectionInput> = (data) => {
-    onAddedSection({ id: idGenerator(), title: data.name, todos: [] });
+    onAddedSection({
+      id: initialSection === undefined ? idGenerator() : initialSection.id,
+      title: data.name,
+      todos: initialSection === undefined ? [] : initialSection.todos,
+    });
+    onClose()
   };
 
   return (
@@ -41,7 +46,7 @@ export const SectionEdit: React.FC<IProps> = (props) => {
 
             <Stack className="todo-manage">
               <IconButton type="submit" color="primary">
-                {isChanged ? <CheckIcon /> : <AddIcon />} 
+                {isChanged ? <CheckIcon /> : <AddIcon />}
               </IconButton>
               <IconButton onClick={onClose} size="small" color="default">
                 <CloseIcon sx={{ width: "16px" }} />

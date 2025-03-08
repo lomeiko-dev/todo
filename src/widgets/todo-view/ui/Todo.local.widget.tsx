@@ -1,0 +1,31 @@
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "shared/lib/hooks";
+import { useLocalCrudSection } from "../model/lib/hooks/local/useLocalCrudSection";
+import { useLocalCrudTodo } from "../model/lib/hooks/local/useLocalCrudTodo";
+import { SectionList } from "./components/Section.list";
+import { loadFromLocalStorage, saveToLocalStorage, todoSelector } from "entities/todo";
+import { TodoList } from "./components/Todo.list";
+
+export const TodoLocalWidget = () => {
+  const crudSection = useLocalCrudSection();
+  const crudTodo = useLocalCrudTodo();
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const eventUnload = () => {
+      dispatch(saveToLocalStorage());
+    };
+
+    dispatch(loadFromLocalStorage());
+    window.addEventListener("unload", eventUnload);
+  }, []);
+
+  const todo = useAppSelector(todoSelector.selectAll);
+
+  return (
+    <SectionList sections={todo} {...crudSection}>
+      <TodoList todos={[]} IdSection="0" {...crudTodo} />
+    </SectionList>
+  );
+};

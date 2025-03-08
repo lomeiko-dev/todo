@@ -1,22 +1,22 @@
-import { useState } from "react";
+import React, { Children, cloneElement, useState } from "react";
 import classNames from "classnames";
-import { useCrudSection } from "../model/lib/hooks/useCrudSection";
-import { useCrudTodo } from "../model/lib/hooks/useCrudTodo";
 import { Box, Button, Dialog, List, ListItem, Snackbar, Typography } from "@mui/material";
-import { TodoList } from "./Todo.list";
-import { SectionEdit, TodoEdit } from "features/todo-form";
-import { SnackbarAction } from "./components/Snackbar.action";
+import { SectionEdit } from "features/todo-form";
+import { SnackbarAction } from "./Snackbar.action";
 import { BaseActions } from "shared/components/actions";
+import { TodoList } from "./Todo.list";
 import { ISectionTodos, SectionItem } from "entities/todo";
 import { IDefaultComponentsProps } from "shared/types/props.types";
+import { IHandlerCrud } from "widgets/todo-view/model/types/type";
 import AddIcon from "@mui/icons-material/Add";
 
-interface IProps extends IDefaultComponentsProps {
+interface IProps extends IDefaultComponentsProps, IHandlerCrud<ISectionTodos, string> {
   sections: ISectionTodos[];
+  children: React.ReactElement<React.ComponentProps<typeof TodoList>>;
 }
 
-export const TodoSectionList: React.FC<IProps> = (props) => {
-  const { sections, className, styleCSS } = props;
+export const SectionList: React.FC<IProps> = (props) => {
+  const { sections, className, styleCSS, children, handleCreated, handleRemoved, handleUpdated } = props;
 
   const [confirmation, setConfirmation] = useState(false);
   const [changed, setChanged] = useState(false);
@@ -34,17 +34,8 @@ export const TodoSectionList: React.FC<IProps> = (props) => {
     setShow(!showForm);
   };
 
-  const { handleAddedSection, handleSectionChanged, handleSectionRemoveConfirmation } = useCrudSection({
-    onCloseFormChanged: handleToggleChanged,
-    onCloseFormCreated: handleToggleForm,
-    onCloseFormRemoving: handleToggleConfirmation,
-  });
-
-  const {handleAddedTodo} = useCrudTodo('new-section')
-
   return (
     <Box className={classNames(className)} style={styleCSS}>
-      {sections.length === 0 && <TodoEdit className="todo-edit-full-width" onAddedTodo={handleAddedTodo} />}
       <List>
         {sections.map((section) => (
           <ListItem key={section.id}>
@@ -52,24 +43,21 @@ export const TodoSectionList: React.FC<IProps> = (props) => {
               actionSlot={<BaseActions onEdit={handleToggleChanged} onRemove={handleToggleConfirmation} />}
               name={section.title}
             >
-              <TodoList idSection={section.id} todos={section.todos} />
+              {Children.map(children, (child) => {
+                return cloneElement(child, { IdSection: section.id, todos: section.todos });
+              })}
             </SectionItem>
             <Snackbar
               open={confirmation}
               onClose={() => setConfirmation(false)}
               message="do you really want to delete the partition?"
-              action={
-                <SnackbarAction
-                  onClose={(handleToggleConfirmation)}
-                  onConfirm={() => handleSectionRemoveConfirmation(section.id)}
-                />
-              }
+              action={<SnackbarAction onClose={handleToggleConfirmation} onConfirm={() => handleRemoved(section.id)} />}
             />
             <Dialog open={changed} onClose={handleToggleChanged}>
               <SectionEdit
                 isChanged
-                initialSection={{ name: section.title }}
-                onAddedSection={(newSection) => handleSectionChanged(section.id, newSection)}
+                initialSection={section}
+                onAddedSection={(newSection) => handleUpdated(section.id, newSection)}
                 onClose={handleToggleChanged}
               />
             </Dialog>
@@ -88,7 +76,7 @@ export const TodoSectionList: React.FC<IProps> = (props) => {
         <Typography>section</Typography>
       </Button>
       <Dialog open={showForm} onClose={handleToggleForm}>
-        <SectionEdit onClose={handleToggleForm} onAddedSection={handleAddedSection} />
+        <SectionEdit onClose={handleToggleForm} onAddedSection={handleCreated} />
       </Dialog>
     </Box>
   );

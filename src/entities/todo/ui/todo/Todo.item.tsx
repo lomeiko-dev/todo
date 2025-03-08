@@ -16,6 +16,8 @@ interface IProps extends IDefaultComponentsProps {
 export const TodoItem: React.FC<IProps> = (props) => {
   const { todo, className, styleCSS, actionSlot, onChecked, onClick } = props;
 
+  console.log(todo.title)
+
   const [hover, setHover] = useState(false);
 
   const toggleHover = () => {

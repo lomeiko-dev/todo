@@ -1,20 +1,31 @@
 import React, { useState } from "react";
 import classNames from "classnames";
-import { useCrudTodo } from "../model/lib/hooks/useCrudTodo";
 import { Button, Dialog, Divider, List, ListItem } from "@mui/material";
 import { TodoEdit } from "features/todo-form";
 import { BaseActions } from "shared/components/actions";
 import { ITodo, TodoDetail, TodoItem } from "entities/todo";
 import { IDefaultComponentsProps } from "shared/types/props.types";
+import { IHandlerCrudTodo } from "../../model/types/type";
 import AddIcon from "@mui/icons-material/Add";
 
-interface IProps extends IDefaultComponentsProps {
-  idSection?: string;
+interface IProps extends IDefaultComponentsProps, IHandlerCrudTodo<ITodo, string, string> {
+  IdSection: string;
   todos: ITodo[];
+  children?: React.ReactNode;
 }
 
 export const TodoList: React.FC<IProps> = React.memo((props) => {
-  const { todos, className, styleCSS, idSection = "new-todo" } = props;
+  const {
+    todos,
+    className,
+    styleCSS,
+    children,
+    handleCreated,
+    handleRemoved,
+    handleToggleChecked,
+    handleUpdated,
+    IdSection,
+  } = props;
 
   const [showForm, setShow] = useState(false);
   const [showTodo, setShowTodo] = useState(false);
@@ -32,10 +43,10 @@ export const TodoList: React.FC<IProps> = React.memo((props) => {
     setChange(!isChanged);
   };
 
-  const { handleAddedTodo, handleTodoChecked, handleTodoRemoved, handleUpdateTodo } = useCrudTodo(idSection, {
-    onCloseFormChanged: toggleChanged,
-    onCloseFormCreated: toggleShowForm,
-  });
+  const handleUpdateTodoWithCloseForm = (id: string, data: ITodo) => {
+    handleUpdated(IdSection, id, data);
+    toggleChanged();
+  };
 
   return (
     <List className={classNames(className)} sx={styleCSS}>
@@ -43,8 +54,8 @@ export const TodoList: React.FC<IProps> = React.memo((props) => {
         <ListItem>
           <TodoItem
             onClick={toggleShowTodo}
-            onChecked={handleTodoChecked}
-            actionSlot={<BaseActions onRemove={() => handleTodoRemoved(todo.id)} onEdit={toggleChanged} />}
+            onChecked={(id) => handleToggleChecked(IdSection, id)}
+            actionSlot={<BaseActions onRemove={() => handleRemoved(IdSection, todo.id)} onEdit={toggleChanged} />}
             todo={todo}
           />
           <Dialog sx={{ "& .MuiDialog-paper": { width: "100%" } }} open={showTodo} onClose={toggleShowTodo}>
@@ -55,18 +66,23 @@ export const TodoList: React.FC<IProps> = React.memo((props) => {
               isChenged
               isFullForm={true}
               initialTodo={todo}
-              onAddedTodo={(data) => handleUpdateTodo(todo.id, data)}
+              onAddedTodo={(data) => handleUpdateTodoWithCloseForm(todo.id, data)}
+              onBack={toggleChanged}
             />
           </Dialog>
         </ListItem>
       ))}
+
+      {children}
+
       {showForm ? (
-        <TodoEdit onAddedTodo={handleAddedTodo} />
+        <TodoEdit onBack={toggleShowForm} onAddedTodo={(data) => handleCreated(IdSection, data)} />
       ) : (
         <Button onClick={toggleShowForm} fullWidth>
           <AddIcon />
         </Button>
       )}
+
       <Divider />
     </List>
   );

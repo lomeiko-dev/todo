@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "shared/lib/hooks";
+import React, { useEffect } from "react";
+import { useAppDispatch, useAppSelector, useObserver } from "shared/lib/hooks";
 import { useLocalCrudSection } from "../model/lib/hooks/local/useLocalCrudSection";
 import { useLocalCrudTodo } from "../model/lib/hooks/local/useLocalCrudTodo";
 import { SectionList } from "./components/Section.list";
@@ -25,7 +25,7 @@ export const TodoLocalWidget = () => {
   const todo = useAppSelector(todoSelector.selectAll);
 
   return (
-    <TodoWrap  onAddedTodo={crudTodo.handleCreated}>
+    <TodoWrap onAddedTodo={crudTodo.handleCreated}>
       <SectionList sections={todo} {...crudSection}>
         <TodoList todos={[]} IdSection="0" {...crudTodo} />
       </SectionList>

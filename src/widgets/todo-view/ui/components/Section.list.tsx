@@ -58,30 +58,28 @@ export const SectionList: React.FC<IProps> = (props) => {
             </SectionItem>
           </ListItem>
         ))}
-        <Snackbar
-          open={confirmation}
-          onClose={() => setConfirmation(false)}
-          message={`Do you really want to delete the partition ${selectSection?.title}?`}
-          action={
-            <SnackbarAction
-              onClose={handleToggleConfirmation}
-              onConfirm={() => handleRemoved(selectSection?.id || "")}
-            />
-          }
-        />
-        <Dialog open={changed} onClose={() => handleToggleChanged()}>
-          <SectionEdit
-            isChanged
-            initialSection={selectSection || undefined}
-            onAddedSection={(newSection) => handleUpdated(selectSection?.id || "", newSection)}
-            onClose={handleToggleChanged}
-          />
-        </Dialog>
+        
       </List>
+      <Snackbar
+        open={confirmation}
+        onClose={() => setConfirmation(false)}
+        message={`Do you really want to delete the partition ${selectSection?.title}?`}
+        action={
+          <SnackbarAction onClose={handleToggleConfirmation} onConfirm={() => handleRemoved(selectSection?.id || "")} />
+        }
+      />
+      <Dialog open={changed} onClose={() => handleToggleChanged()}>
+        <SectionEdit
+          isChanged
+          initialSection={selectSection || undefined}
+          onAddedSection={(newSection) => handleUpdated(selectSection?.id || "", newSection)}
+          onClose={handleToggleChanged}
+        />
+      </Dialog>
       <Button
         onClick={handleToggleForm}
         color="secondary"
-        sx={{ height: "50px", marginTop: '30px' }}
+        sx={{ height: "50px", marginTop: "30px" }}
         size="large"
         fullWidth
         endIcon={<AddIcon />}

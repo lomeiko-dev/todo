@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { todoAdapter } from "./todo.adapter";
-import { ITodo } from "../types";
+import { ISectionTodos, ITodo } from "../types";
 import { idGenerator } from "shared/lib/utils";
 
 const todoSlice = createSlice({
@@ -62,7 +62,7 @@ const todoSlice = createSlice({
       const data = localStorage.getItem("tasks");
       const tasks = data ? JSON.parse(data) : [];
 
-      todoAdapter.setAll(state, tasks);
+      todoAdapter.setAll(state, tasks as ISectionTodos[]);
     },
   },
 });

@@ -1,5 +1,4 @@
 import { ITag, typePriority } from "shared/ui/boxes";
-import { Dayjs } from "dayjs";
 
 export interface ICommentTodo {
   userAvatar: string;
@@ -17,7 +16,7 @@ export interface ITodo {
   tags?: ITag[];
   dateCreated: string;
   dateUpdated: string;
-  deadline: Dayjs;
+  deadline: string;
   priority: typePriority;
 }
 

@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { Button, Dialog, Divider, List, ListItem } from "@mui/material";
 import { TodoEdit } from "features/todo-form";
 import { BaseActions } from "shared/components/actions";
-import { ITodo, TodoDetail, TodoDetailLazy, TodoItem } from "entities/todo";
+import { ITodo, TodoDetailLazy, TodoItem } from "entities/todo";
 import { IDefaultComponentsProps } from "shared/types/props.types";
 import { IHandlerCrudTodo } from "../../model/types/type";
 import AddIcon from "@mui/icons-material/Add";
@@ -55,7 +55,7 @@ export const TodoList: React.FC<IProps> = React.memo((props) => {
   return (
     <List className={classNames(className)} sx={styleCSS}>
       {todos.map((todo) => (
-        <ListItem>
+        <ListItem key={todo.id}>
           <TodoItem
             onClick={() => toggleShowTodo(todo)}
             onChecked={(id) => handleToggleChecked(IdSection, id)}

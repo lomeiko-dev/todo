@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useAppDispatch, useAppSelector, useObserver } from "shared/lib/hooks";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "shared/lib/hooks";
 import { useLocalCrudSection } from "../model/lib/hooks/local/useLocalCrudSection";
 import { useLocalCrudTodo } from "../model/lib/hooks/local/useLocalCrudTodo";
 import { SectionList } from "./components/Section.list";

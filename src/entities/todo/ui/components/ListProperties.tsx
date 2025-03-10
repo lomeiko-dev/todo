@@ -5,7 +5,6 @@ import { TagList } from "./TagList";
 import { DateBox, PriorityBox } from "shared/ui/boxes";
 import { IDefaultComponentsProps } from "shared/types/props.types";
 import { ITodo } from "../../model/types/types";
-import { Dayjs } from "dayjs";
 
 
 interface IProps extends IDefaultComponentsProps, Pick<ITodo, "deadline" | "priority" | "tags"> {}

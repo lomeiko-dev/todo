@@ -12,11 +12,13 @@ interface IProps {
 const TodoDetail: React.FC<IProps> = (props) => {
   const { todo, children } = props;
 
+  console.log(todo)
+
   return (
     <Container maxWidth="sm">
       <Box marginTop="20px" display="flex" flexDirection="column">
         <TodoHead description={todo.description} title={todo.title} />
-        <ListProperties className={"foot"} deadline={todo.deadline} priority={todo.priority} tags={todo.tags} />
+        <ListProperties isFullTags className={"foot"} deadline={todo.deadline} priority={todo.priority} tags={todo.tags} />
         <Divider />
       </Box>
       {children}

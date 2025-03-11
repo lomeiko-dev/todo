@@ -7,11 +7,13 @@ import { IDefaultComponentsProps } from "shared/types/props.types";
 import { ITodo } from "../../model/types/types";
 
 
-interface IProps extends IDefaultComponentsProps, Pick<ITodo, "deadline" | "priority" | "tags"> {}
+interface IProps extends IDefaultComponentsProps, Pick<ITodo, "deadline" | "priority" | "tags"> {
+  isFullTags?: boolean;
+}
 
 export const ListProperties: React.FC<IProps> = (props) => {
-  const { deadline, priority, tags, className, styleCSS } = props;
-  console.log(deadline)
+  const { deadline, priority, tags, className, styleCSS, isFullTags } = props;
+
   return (
     <List className={classNames(className, "list-properties")} sx={styleCSS}>
       <ListItem className="properties-item">
@@ -20,8 +22,8 @@ export const ListProperties: React.FC<IProps> = (props) => {
       <ListItem className="properties-item">
         <PriorityBox priority={priority || 'none'} />
       </ListItem>
-      <ListItem className="properties-item">
-        <TagList tags={tags || []} />
+      <ListItem className="properties-item properties-item-tag-list">
+        <TagList maxTags={isFullTags ? tags?.length || 0 : 8} tags={tags || []} />
       </ListItem>
     </List>
   );

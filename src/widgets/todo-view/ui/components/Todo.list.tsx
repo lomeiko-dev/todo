@@ -64,7 +64,7 @@ export const TodoList: React.FC<IProps> = React.memo((props) => {
             }
             todo={todo}
           />
-          <Dialog sx={{ "& .MuiDialog-paper": { width: "100%" } }} open={showTodo} onClose={toggleShowTodo}>
+          <Dialog sx={{ "& .MuiDialog-paper": { width: "100%" } }} open={showTodo} onClose={() => setShowTodo(false) }>
             <Suspense fallback={<Backdrop/>}>
               <TodoDetailLazy todo={selectedTodo || todo} />
             </Suspense>

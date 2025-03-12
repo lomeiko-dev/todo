@@ -3,19 +3,20 @@ import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { IDefaultComponentsProps } from "shared/types/props.types";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ListIcon from "@mui/icons-material/List";
+import { setTypeView, typeView } from "../model";
+import { useAppDispatch, useAppSelector } from "shared/lib/hooks";
+import { typeViewTodoSelector } from "../model/slice/view-todo.selectors";
 
-type typeView = "list" | "board";
-
-interface IProps extends IDefaultComponentsProps {
-  onAction: (type: typeView) => void;
-  alignment: typeView;
-}
+interface IProps extends IDefaultComponentsProps {}
 
 export const ViewToggle: React.FC<IProps> = (props) => {
-  const { styleCSS, className, onAction, alignment } = props;
+  const { styleCSS, className } = props;
 
-  const handleAlignment = (_: React.MouseEvent<HTMLElement>, newAlignment: typeView) => {
-    onAction(newAlignment);
+  const dispatch = useAppDispatch()
+  const type = useAppSelector(typeViewTodoSelector)
+
+  const handleAlignment = (_: React.MouseEvent<HTMLElement>, newType: typeView) => {
+    dispatch(setTypeView(newType));
   };
 
   return (
@@ -23,12 +24,12 @@ export const ViewToggle: React.FC<IProps> = (props) => {
       size="small"
       className={classNames(className)}
       sx={styleCSS}
-      value={alignment}
+      value={type}
       exclusive
       onChange={handleAlignment}
       aria-label="text alignment"
     >
-      <ToggleButton value={"list"} aria-label="left aligned">
+      <ToggleButton value="list" aria-label="left aligned">
         <ListIcon />
       </ToggleButton>
       <ToggleButton value="board" aria-label="right aligned">

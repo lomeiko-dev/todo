@@ -4,12 +4,9 @@ import "./style.scss";
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from "@mui/material";
 import { IDefaultComponentsProps } from "shared/types/props.types";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { ISectionProps } from "entities/todo/model";
 
-interface IProps extends IDefaultComponentsProps {
-  children: React.ReactNode;
-  actionSlot?: React.ReactNode;
-  name: string;
-}
+interface IProps extends IDefaultComponentsProps, ISectionProps{}
 export const SectionItem: React.FC<IProps> = (props) => {
   const { children, className, styleCSS, name, actionSlot } = props;
 

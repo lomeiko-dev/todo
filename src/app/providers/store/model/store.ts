@@ -3,11 +3,13 @@ import { IStore } from "./types";
 import { authApiMiddleware, authApiReducer } from "features/auth";
 import { authDataSliceReducer } from "entities/auth";
 import { todoSliceReducer } from "entities/todo";
+import { viewTodoSliceReducer } from "features/view-toggle";
 
 const rootReducer: ReducersMapObject<IStore> = {
   AuthApi: authApiReducer,
   AuthData: authDataSliceReducer,
-  Todo: todoSliceReducer
+  Todo: todoSliceReducer,
+  ViewTodo: viewTodoSliceReducer,
 };
 
 export const store = configureStore({
